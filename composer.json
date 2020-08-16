@@ -1,0 +1,41 @@
+{
+    "name": "premier/markdown-builder",
+    "type": "library",
+    "description": "Markdown Builder",
+    "keywords": [
+        "markdown",
+        "builder"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Konstantin Grachev",
+            "email": "me@grachevko.ru"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "ext-mbstring": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Premier\\MarkdownBuilder\\": "src/"
+        },
+        "exclude-from-classmap": [
+            "/tests/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Premier\\MarkdownBuilder\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.3",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpstan/phpstan": "^0.12.37",
+        "phpstan/phpstan-strict-rules": "^0.12.4",
+        "phpstan/phpstan-phpunit": "^0.12.16",
+        "ergebnis/composer-normalize": "^2.6"
+    }
+}

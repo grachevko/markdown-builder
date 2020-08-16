@@ -1,0 +1,1 @@
+Markdown::builder()->bulletedList(['Foo', 'Bar', 'Baz'])->getMarkdown();

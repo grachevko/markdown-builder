@@ -1,0 +1,10 @@
+Markdown::builder()
+    ->p('Callback Example')
+    ->callback(static function (Builder $builder) {
+        foreach ([1, 2, 3] as $item) {
+            $builder
+                ->p($item.' paragraph.')
+                ->hr();
+        }
+    })
+    ->getMarkdown();

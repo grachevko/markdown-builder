@@ -1,0 +1,11 @@
+Markdown::builder()
+    ->blockquote(
+        Markdown::builder()
+          ->h1('Lists')
+          ->bulletedList([
+            'Foo',
+            Markdown::numberedList(['A', 'B', 'C']),
+            'Bar'
+          ])->getMarkdown()
+    )
+    ->getMarkdown();

@@ -1,0 +1,1 @@
+Markdown::img('cat.jpg', 'Cat');

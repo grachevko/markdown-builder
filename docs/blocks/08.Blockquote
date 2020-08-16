@@ -1,0 +1,1 @@
+Markdown::builder()->blockquote("Foo\nBar\nBaz")->getMarkdown();

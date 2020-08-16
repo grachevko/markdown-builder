@@ -1,0 +1,12 @@
+Markdown::builder()
+    ->h1('Markdown Builder')
+    ->p('A helper class to create markdown.')
+    ->h2('Install '.Markdown::bold('this').' powerfull library')
+    ->code('composer require premier/markdown-builder', 'bash')
+    ->h2('Todos')
+    ->bulletedList([
+        'write tests',
+        Markdown::numberedList(['A', 'B', 'C']),
+        'add more markdown features',
+    ])
+    ->getMarkdown();
