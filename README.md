@@ -13,8 +13,6 @@ composer require premier/markdown-builder
 Usage
 -----
 
-PHP-Code:
-
 ```php
 echo Markdown::builder()
     ->h1('Markdown Builder')
@@ -29,8 +27,6 @@ echo Markdown::builder()
     ])
     ->getMarkdown();
 ```
-
-Markdown:
 
 ````markdown
 Markdown Builder
@@ -66,13 +62,9 @@ The markdown builder have two kinds of elements, block and inline elements.
 
 #### h1
 
-PHP-Code:
-
 ```php
 echo Markdown::builder()->h1('Hello H1')->getMarkdown();
 ```
-
-Markdown:
 
 ```markdown
 Hello H1
@@ -81,13 +73,9 @@ Hello H1
 
 #### h2
 
-PHP-Code:
-
 ```php
 echo Markdown::builder()->h2('Hello H2')->getMarkdown();
 ```
-
-Markdown:
 
 ```markdown
 Hello H2
@@ -96,13 +84,9 @@ Hello H2
 
 #### h3
 
-PHP-Code:
-
 ```php
 echo Markdown::builder()->h3('Hello H3')->getMarkdown();
 ```
-
-Markdown:
 
 ```markdown
 ### Hello H3
@@ -110,13 +94,9 @@ Markdown:
 
 #### h4
 
-PHP-Code:
-
 ```php
 echo Markdown::builder()->h4('Hello H4')->getMarkdown();
 ```
-
-Markdown:
 
 ```markdown
 #### Hello H4
@@ -124,13 +104,9 @@ Markdown:
 
 #### h5
 
-PHP-Code:
-
 ```php
 echo Markdown::builder()->h5('Hello H5')->getMarkdown();
 ```
-
-Markdown:
 
 ```markdown
 ##### Hello H5
@@ -138,13 +114,9 @@ Markdown:
 
 #### h6
 
-PHP-Code:
-
 ```php
 echo Markdown::builder()->h6('Hello H6')->getMarkdown();
 ```
-
-Markdown:
 
 ```markdown
 ###### Hello H6
@@ -152,13 +124,9 @@ Markdown:
 
 #### p
 
-PHP-Code:
-
 ```php
 echo Markdown::builder()->p('paragraph')->getMarkdown();
 ```
-
-Markdown:
 
 ```markdown
 paragraph
@@ -166,13 +134,9 @@ paragraph
 
 #### Blockquote
 
-PHP-Code:
-
 ```php
 echo Markdown::builder()->blockquote("Foo\nBar\nBaz")->getMarkdown();
 ```
-
-Markdown:
 
 ```markdown
 >  Foo
@@ -182,13 +146,9 @@ Markdown:
 
 #### Bulleted list
 
-PHP-Code:
-
 ```php
 echo Markdown::builder()->bulletedList(['Foo', 'Bar', 'Baz'])->getMarkdown();
 ```
-
-Markdown:
 
 ```markdown
 * Foo
@@ -198,13 +158,9 @@ Markdown:
 
 #### Numbered list
 
-PHP-Code:
-
 ```php
 echo Markdown::builder()->numberedList(['Foo', 'Bar', 'Baz'])->getMarkdown();
 ```
-
-Markdown:
 
 ```markdown
 1. Foo
@@ -214,13 +170,9 @@ Markdown:
 
 #### hr
 
-PHP-Code:
-
 ```php
 echo Markdown::builder()->hr()->getMarkdown();
 ```
-
-Markdown:
 
 ```markdown
 ---------------------------------------
@@ -228,13 +180,9 @@ Markdown:
 
 #### Code
 
-PHP-Code:
-
 ```php
 echo Markdown::builder()->code('$var = "test";', 'php')->getMarkdown();
 ```
-
-Markdown:
 
 ````markdown
 ```php
@@ -243,8 +191,6 @@ $var = "test";
 ````
 
 #### Table
-
-PHP-Code:
 
 ```php
 echo Markdown::builder()
@@ -258,11 +204,9 @@ echo Markdown::builder()
     ->getMarkdown();
 ```
 
-Markdown:
-
 ```markdown
 First Header | Second Header
-============ | =============
+------------ | -------------
 Content from cell 1 | Content from cell 2
 Content in the first column | Content in the second column
 ```
@@ -271,13 +215,9 @@ Content in the first column | Content in the second column
 
 #### Bold
 
-PHP-Code:
-
 ```php
 echo Markdown::bold('Hey!');
 ```
-
-Markdown:
 
 ```markdown
 **Hey!**
@@ -285,13 +225,9 @@ Markdown:
 
 #### Italic
 
-PHP-Code:
-
 ```php
 echo Markdown::italic('huhu');
 ```
-
-Markdown:
 
 ```markdown
 *huhu*
@@ -299,13 +235,9 @@ Markdown:
 
 #### Code
 
-PHP-Code:
-
 ```php
 echo Markdown::code('$var = "test";');
 ```
-
-Markdown:
 
 ```markdown
 `$var = "test";`
@@ -313,13 +245,9 @@ Markdown:
 
 #### Link
 
-PHP-Code:
-
 ```php
 echo Markdown::link('https://google.com', 'Google');
 ```
-
-Markdown:
 
 ```markdown
 [Google](https://google.com)
@@ -327,13 +255,9 @@ Markdown:
 
 #### img
 
-PHP-Code:
-
 ```php
 echo Markdown::img('cat.jpg', 'Cat');
 ```
-
-Markdown:
 
 ```markdown
 ![Cat](cat.jpg)
@@ -341,13 +265,9 @@ Markdown:
 
 #### Numbered list
 
-PHP-Code:
-
 ```php
 echo Markdown::numberedList(['A', 'B', 'C']);
 ```
-
-Markdown:
 
 ```markdown
 1. A
@@ -357,13 +277,9 @@ Markdown:
 
 #### Bulleted list
 
-PHP-Code:
-
 ```php
 echo Markdown::bulletedList(['A', 'B', 'C']);
 ```
-
-Markdown:
 
 ```markdown
 * A
@@ -376,8 +292,6 @@ Markdown:
 #### Collapse block
 
 if you need collapse blocks, you can create a new builder instance with his own clean buffer.
-
-PHP-Code:
 
 ```php
 echo Markdown::builder()
@@ -392,8 +306,6 @@ echo Markdown::builder()
     )
     ->getMarkdown();
 ```
-
-Markdown:
 
 ```markdown
 >  Lists
@@ -410,8 +322,6 @@ Markdown:
 
 If you want to add blocks from complex logic or iterable value, but don't want to stop chain calls you can use callback.
 
-PHP-Code:
-
 ```php
 echo Markdown::builder()
     ->p('Callback Example')
@@ -424,8 +334,6 @@ echo Markdown::builder()
     })
     ->getMarkdown();
 ```
-
-Markdown:
 
 ```markdown
 Callback Example
