@@ -227,6 +227,39 @@ echo Markdown::builder()->numberedList(static function (NumberedListBuilder $bui
 3. bar
 ```
 
+#### Checklist
+
+```php
+echo Markdown::builder()->checklist([
+        'Hallo' => false,
+        'foo' => false,
+        'bar' => true,
+    ])->getMarkdown();
+```
+
+```markdown
+- [ ] Hallo
+- [ ] foo
+- [X] bar
+```
+
+#### Checklist callable
+
+```php
+echo Markdown::builder()->checklist(static function (ChecklistBuilder $builder): void {
+        $builder
+            ->addLine('Hallo', false)
+            ->addLine('foo', false)
+            ->addLine('bar', true);
+    })->getMarkdown();
+```
+
+```markdown
+- [ ] Hallo
+- [ ] foo
+- [X] bar
+```
+
 #### Table
 
 ```php
@@ -345,6 +378,18 @@ echo Markdown::bulletedList(['A', 'B', 'C']);
 * A
 * B
 * C
+```
+
+#### Checklist
+
+```php
+echo Markdown::checklist(['A' => true, 'B' => true, 'C' => false]);
+```
+
+```markdown
+- [X] A
+- [X] B
+- [ ] C
 ```
 
 ### Advanced Features

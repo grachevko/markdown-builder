@@ -146,6 +146,26 @@ final class Builder
         return $this;
     }
 
+    /**
+     * @param array<string, bool>|callable $list
+     */
+    public function checklist($list): self
+    {
+        $this->blocks[] = $builder = new ChecklistBuilder();
+
+        if (is_callable($list)) {
+            $list($builder);
+
+            return $this;
+        }
+
+        foreach ($list as $line => $checked) {
+            $builder->addLine($line, $checked);
+        }
+
+        return $this;
+    }
+
     public function hr(): self
     {
         return $this->p('---------------------------------------');

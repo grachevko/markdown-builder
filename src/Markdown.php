@@ -73,4 +73,14 @@ final class Markdown
             ->numberedList($list)
             ->getMarkdown();
     }
+
+    /**
+     * @param array<string, bool>|callable $list
+     */
+    public static function checklist($list): string
+    {
+        return self::builder()
+            ->checklist($list)
+            ->getMarkdown();
+    }
 }

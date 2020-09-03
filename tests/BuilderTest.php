@@ -7,6 +7,7 @@ namespace Premier\MarkdownBuilder\Tests;
 use PHPUnit\Framework\TestCase;
 use Premier\MarkdownBuilder\Builder;
 use Premier\MarkdownBuilder\BulletedListBuilder;
+use Premier\MarkdownBuilder\ChecklistBuilder;
 use Premier\MarkdownBuilder\Markdown;
 use Premier\MarkdownBuilder\NumberedListBuilder;
 use Premier\MarkdownBuilder\TableBuilder;
@@ -257,6 +258,41 @@ class BuilderTest extends TestCase
             ]),
             'bar',
         ]);
+
+        static::assertSame($markdown, $builder->getMarkdown());
+    }
+
+    public function testChecklist(): void
+    {
+        $markdown = <<<'MARKDOWN'
+            - [ ] Hallo
+            - [ ] foo
+            - [X] bar
+            MARKDOWN;
+
+        $builder = Markdown::builder()->checklist([
+            'Hallo' => false,
+            'foo' => false,
+            'bar' => true,
+        ]);
+
+        static::assertSame($markdown, $builder->getMarkdown());
+    }
+
+    public function testChecklistCallable(): void
+    {
+        $markdown = <<<'MARKDOWN'
+            - [ ] Hallo
+            - [ ] foo
+            - [X] bar
+            MARKDOWN;
+
+        $builder = Markdown::builder()->checklist(static function (ChecklistBuilder $builder): void {
+            $builder
+                ->addLine('Hallo', false)
+                ->addLine('foo', false)
+                ->addLine('bar', true);
+        });
 
         static::assertSame($markdown, $builder->getMarkdown());
     }
