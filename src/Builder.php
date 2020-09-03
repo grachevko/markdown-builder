@@ -6,6 +6,7 @@ namespace Premier\MarkdownBuilder;
 
 use function array_map;
 use function explode;
+use function file_put_contents;
 use function implode;
 use function is_callable;
 use function mb_strlen;
@@ -224,6 +225,13 @@ final class Builder
         }
 
         $tableBuilder->addRow(...$values);
+
+        return $this;
+    }
+
+    public function dump(string $file): self
+    {
+        file_put_contents($file, $this->getMarkdown());
 
         return $this;
     }

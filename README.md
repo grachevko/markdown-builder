@@ -462,3 +462,11 @@ Callback Example
 
 ---------------------------------------
 ```
+
+#### Dump to File
+
+Instead of returning markdown as a string you can easy dump result to file.
+
+```php
+Markdown::builder()->h1('Hello world!')->dump('index.md');
+```
