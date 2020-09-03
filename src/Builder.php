@@ -205,18 +205,7 @@ final class Builder
      */
     public function table(array $headers, iterable $values): self
     {
-        $separator = array_map(static function (string $header): string {
-            return str_repeat('-', mb_strlen($header));
-        }, $headers);
-
-        $this->blocks[] = implode(' | ', $headers).PHP_EOL;
-        $this->blocks[] = implode(' | ', $separator).PHP_EOL;
-
-        foreach ($values as $value) {
-            $this->blocks[] = implode(' | ', $value).PHP_EOL;
-        }
-
-        $this->blocks[] = PHP_EOL;
+        $this->blocks[] = (new TableBuilder($headers))->addRow(...$values);
 
         return $this;
     }
