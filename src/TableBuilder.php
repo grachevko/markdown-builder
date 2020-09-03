@@ -10,7 +10,7 @@ use function mb_strlen;
 use const PHP_EOL;
 use function str_repeat;
 
-final class TableBuilder
+final class TableBuilder implements Block
 {
     /**
      * @var array<int, string>
@@ -60,6 +60,8 @@ final class TableBuilder
         foreach ($this->rows as $row) {
             $markdown .= implode(' | ', $row).PHP_EOL;
         }
+
+        $markdown .= PHP_EOL;
 
         return $markdown;
     }

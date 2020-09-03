@@ -21,7 +21,7 @@ use function trim;
 final class Builder
 {
     /**
-     * @var string[]|TableBuilder[]
+     * @var string[]|Block[]
      */
     private array $blocks = [];
 
