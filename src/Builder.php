@@ -8,6 +8,7 @@ use function array_map;
 use function array_values;
 use function explode;
 use function implode;
+use function is_callable;
 use function mb_strlen;
 use const PHP_EOL;
 use function str_repeat;
@@ -20,7 +21,7 @@ use function trim;
 final class Builder
 {
     /**
-     * @var string[]
+     * @var string[]|TableBuilder[]
      */
     private array $blocks = [];
 
@@ -200,12 +201,20 @@ final class Builder
     }
 
     /**
-     * @param array<int, string>   $headers
-     * @param iterable<int, array> $values
+     * @param array<int, string>            $headers
+     * @param iterable<int, array>|callable $values
      */
-    public function table(array $headers, iterable $values): self
+    public function table(array $headers, $values): self
     {
-        $this->blocks[] = (new TableBuilder($headers))->addRow(...$values);
+        $this->blocks[] = $tableBuilder = new TableBuilder($headers);
+
+        if (is_callable($values)) {
+            $values($tableBuilder);
+
+            return $this;
+        }
+
+        $tableBuilder->addRow(...$values);
 
         return $this;
     }

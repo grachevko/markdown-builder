@@ -7,6 +7,7 @@ namespace Premier\MarkdownBuilder\Tests;
 use PHPUnit\Framework\TestCase;
 use Premier\MarkdownBuilder\Builder;
 use Premier\MarkdownBuilder\Markdown;
+use Premier\MarkdownBuilder\TableBuilder;
 
 class BuilderTest extends TestCase
 {
@@ -302,6 +303,29 @@ class BuilderTest extends TestCase
                     ['Content from cell 1', 'Content from cell 2'],
                     ['Content in the first column', 'Content in the second column'],
                 ]
+            );
+
+        static::assertSame($markdown, $builder->getMarkdown());
+    }
+
+    public function testTableCallable(): void
+    {
+        $markdown = <<<'MARKDOWN'
+            First Header | Second Header
+            ------------ | -------------
+            Content from cell 1 | Content from cell 2
+            Content in the first column | Content in the second column
+            MARKDOWN;
+
+        $builder = Markdown::builder()
+            ->table(
+                ['First Header', 'Second Header'],
+                static function (TableBuilder $builder): void {
+                    $builder->addRow(
+                        ['Content from cell 1', 'Content from cell 2'],
+                        ['Content in the first column', 'Content in the second column'],
+                    );
+                },
             );
 
         static::assertSame($markdown, $builder->getMarkdown());
