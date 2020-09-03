@@ -20,10 +20,11 @@ echo Markdown::builder()
     ->h2('Install '.Markdown::bold('this').' powerfull library')
     ->code('composer require premier/markdown-builder', 'bash')
     ->h2('Todos')
-    ->bulletedList([
-        'write tests',
-        Markdown::numberedList(['A', 'B', 'C']),
-        'add more markdown features',
+    ->checklist([
+        'write tests' => true,
+        Markdown::numberedList(['TableBuilder', 'ListBuilders', 'Checklist']) => true,
+        'add more markdown features' => false,
+        'Configure CI' => false,
     ])
     ->getMarkdown();
 ```
@@ -44,11 +45,12 @@ composer require premier/markdown-builder
 Todos
 -----
 
-* write tests
-* 1. A
-  2. B
-  3. C
-* add more markdown features
+- [X] write tests
+- [X] 1. TableBuilder
+      2. ListBuilders
+      3. Checklist
+- [ ] add more markdown features
+- [ ] Configure CI
 ````
 
 API
