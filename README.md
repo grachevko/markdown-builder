@@ -156,6 +156,25 @@ echo Markdown::builder()->bulletedList(['Foo', 'Bar', 'Baz'])->getMarkdown();
 * Baz
 ```
 
+#### Bulleted list callable
+
+```php
+echo Markdown::builder()
+    ->bulletedList(static function (BulletedListBuilder $builder): void {
+        $builder->addLine(
+            'Hallo',
+            'foo',
+            'bar',
+        );
+    })->getMarkdown();
+```
+
+```markdown
+* Hallo
+* foo
+* bar
+```
+
 #### Numbered list
 
 ```php

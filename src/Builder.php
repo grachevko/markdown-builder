@@ -112,23 +112,19 @@ final class Builder
     }
 
     /**
-     * @param array<int, string> $list
+     * @param array<int, string>|callable $list
      */
-    public function bulletedList(array $list): self
+    public function bulletedList($list): self
     {
-        foreach ($list as $element) {
-            $lines = explode(PHP_EOL, $element);
+        $this->blocks[] = $builder = new BulletedListBuilder();
 
-            foreach ($lines as $i => $line) {
-                if (0 === $i) {
-                    $this->blocks[] = '* '.$line.PHP_EOL;
-                } else {
-                    $this->blocks[] = '  '.$line.PHP_EOL;
-                }
-            }
+        if (is_callable($list)) {
+            $list($builder);
+
+            return $this;
         }
 
-        $this->blocks[] = PHP_EOL;
+        $builder->addLine(...$list);
 
         return $this;
     }

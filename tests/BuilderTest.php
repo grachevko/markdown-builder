@@ -6,6 +6,7 @@ namespace Premier\MarkdownBuilder\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Premier\MarkdownBuilder\Builder;
+use Premier\MarkdownBuilder\BulletedListBuilder;
 use Premier\MarkdownBuilder\Markdown;
 use Premier\MarkdownBuilder\TableBuilder;
 
@@ -141,6 +142,25 @@ class BuilderTest extends TestCase
             'foo',
             'bar',
         ]);
+
+        static::assertSame($markdown, $builder->getMarkdown());
+    }
+
+    public function testBulletedCallableList(): void
+    {
+        $markdown = <<<'MARKDOWN'
+            * Hallo
+            * foo
+            * bar
+            MARKDOWN;
+
+        $builder = Markdown::builder()->bulletedList(static function (BulletedListBuilder $builder): void {
+            $builder->addLine(
+                'Hallo',
+                'foo',
+                'bar',
+            );
+        });
 
         static::assertSame($markdown, $builder->getMarkdown());
     }
