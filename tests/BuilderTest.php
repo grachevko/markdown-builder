@@ -279,6 +279,25 @@ class BuilderTest extends TestCase
         static::assertSame($markdown, $builder->getMarkdown());
     }
 
+    public function testChecklistMultiline(): void
+    {
+        $markdown = <<<'MARKDOWN'
+            - [ ] Hallo
+            - [ ] 1. foo
+                  2. bar
+                  3. baz
+            - [X] bar
+            MARKDOWN;
+
+        $builder = Markdown::builder()->checklist([
+            'Hallo' => false,
+            Markdown::numberedList(['foo', 'bar', 'baz']) => false,
+            'bar' => true,
+        ]);
+
+        static::assertSame($markdown, $builder->getMarkdown());
+    }
+
     public function testChecklistCallable(): void
     {
         $markdown = <<<'MARKDOWN'

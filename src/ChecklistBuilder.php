@@ -38,7 +38,7 @@ final class ChecklistBuilder implements Block
                 if (0 === $i) {
                     $markdown .= '- ['.($checked ? 'X' : ' ').'] '.$line.PHP_EOL;
                 } else {
-                    $markdown .= '  '.$line.PHP_EOL;
+                    $markdown .= '      '.$line.PHP_EOL;
                 }
             }
         }
