@@ -55,9 +55,9 @@ final class Markdown
     }
 
     /**
-     * @param array<int, string> $list
+     * @param array<int, string>|callable $list
      */
-    public static function bulletedList(array $list): string
+    public static function bulletedList($list): string
     {
         return self::builder()
             ->bulletedList($list)
@@ -65,9 +65,9 @@ final class Markdown
     }
 
     /**
-     * @param array<int, string> $list
+     * @param array<int, string>|callable $list
      */
-    public static function numberedList(array $list): string
+    public static function numberedList($list): string
     {
         return self::builder()
             ->numberedList($list)
