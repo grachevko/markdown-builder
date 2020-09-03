@@ -1,4 +1,5 @@
-Markdown::builder()->checklist(static function (ChecklistBuilder $builder): void {
+Markdown::builder()
+    ->checklist(static function (ChecklistBuilder $builder): void {
         $builder
             ->addLine('Hallo', false)
             ->addLine('foo', false)

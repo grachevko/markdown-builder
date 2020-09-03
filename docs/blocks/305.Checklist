@@ -1,4 +1,5 @@
-Markdown::builder()->checklist([
+Markdown::builder()
+    ->checklist([
         'Hallo' => false,
         'foo' => false,
         'bar' => true,

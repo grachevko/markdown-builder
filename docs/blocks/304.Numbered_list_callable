@@ -1,4 +1,5 @@
-Markdown::builder()->numberedList(static function (NumberedListBuilder $builder) {
+Markdown::builder()
+    ->numberedList(static function (NumberedListBuilder $builder) {
         $builder->addLine(
             'Hallo',
             'foo',

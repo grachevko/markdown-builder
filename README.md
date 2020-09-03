@@ -14,7 +14,7 @@ Usage
 -----
 
 ```php
-echo Markdown::builder()
+Markdown::builder()
     ->h1('Markdown Builder')
     ->p('A helper class to create markdown.')
     ->h2('Install '.Markdown::bold('this').' powerfull library')
@@ -65,7 +65,7 @@ The markdown builder have two kinds of elements, block and inline elements.
 #### h1
 
 ```php
-echo Markdown::builder()->h1('Hello H1')->getMarkdown();
+Markdown::builder()->h1('Hello H1')->getMarkdown();
 ```
 
 ```markdown
@@ -76,7 +76,7 @@ Hello H1
 #### h2
 
 ```php
-echo Markdown::builder()->h2('Hello H2')->getMarkdown();
+Markdown::builder()->h2('Hello H2')->getMarkdown();
 ```
 
 ```markdown
@@ -87,7 +87,7 @@ Hello H2
 #### h3
 
 ```php
-echo Markdown::builder()->h3('Hello H3')->getMarkdown();
+Markdown::builder()->h3('Hello H3')->getMarkdown();
 ```
 
 ```markdown
@@ -97,7 +97,7 @@ echo Markdown::builder()->h3('Hello H3')->getMarkdown();
 #### h4
 
 ```php
-echo Markdown::builder()->h4('Hello H4')->getMarkdown();
+Markdown::builder()->h4('Hello H4')->getMarkdown();
 ```
 
 ```markdown
@@ -107,7 +107,7 @@ echo Markdown::builder()->h4('Hello H4')->getMarkdown();
 #### h5
 
 ```php
-echo Markdown::builder()->h5('Hello H5')->getMarkdown();
+Markdown::builder()->h5('Hello H5')->getMarkdown();
 ```
 
 ```markdown
@@ -117,7 +117,7 @@ echo Markdown::builder()->h5('Hello H5')->getMarkdown();
 #### h6
 
 ```php
-echo Markdown::builder()->h6('Hello H6')->getMarkdown();
+Markdown::builder()->h6('Hello H6')->getMarkdown();
 ```
 
 ```markdown
@@ -127,7 +127,7 @@ echo Markdown::builder()->h6('Hello H6')->getMarkdown();
 #### p
 
 ```php
-echo Markdown::builder()->p('paragraph')->getMarkdown();
+Markdown::builder()->p('paragraph')->getMarkdown();
 ```
 
 ```markdown
@@ -137,7 +137,7 @@ paragraph
 #### Blockquote
 
 ```php
-echo Markdown::builder()->blockquote("Foo\nBar\nBaz")->getMarkdown();
+Markdown::builder()->blockquote("Foo\nBar\nBaz")->getMarkdown();
 ```
 
 ```markdown
@@ -149,7 +149,7 @@ echo Markdown::builder()->blockquote("Foo\nBar\nBaz")->getMarkdown();
 #### hr
 
 ```php
-echo Markdown::builder()->hr()->getMarkdown();
+Markdown::builder()->hr()->getMarkdown();
 ```
 
 ```markdown
@@ -159,7 +159,7 @@ echo Markdown::builder()->hr()->getMarkdown();
 #### Code
 
 ```php
-echo Markdown::builder()->code('$var = "test";', 'php')->getMarkdown();
+Markdown::builder()->code('$var = "test";', 'php')->getMarkdown();
 ```
 
 ````markdown
@@ -171,7 +171,7 @@ $var = "test";
 #### Bulleted list
 
 ```php
-echo Markdown::builder()->bulletedList(['Foo', 'Bar', 'Baz'])->getMarkdown();
+Markdown::builder()->bulletedList(['Foo', 'Bar', 'Baz'])->getMarkdown();
 ```
 
 ```markdown
@@ -183,7 +183,7 @@ echo Markdown::builder()->bulletedList(['Foo', 'Bar', 'Baz'])->getMarkdown();
 #### Bulleted list callable
 
 ```php
-echo Markdown::builder()
+Markdown::builder()
     ->bulletedList(static function (BulletedListBuilder $builder): void {
         $builder->addLine(
             'Hallo',
@@ -202,7 +202,7 @@ echo Markdown::builder()
 #### Numbered list
 
 ```php
-echo Markdown::builder()->numberedList(['Foo', 'Bar', 'Baz'])->getMarkdown();
+Markdown::builder()->numberedList(['Foo', 'Bar', 'Baz'])->getMarkdown();
 ```
 
 ```markdown
@@ -214,7 +214,8 @@ echo Markdown::builder()->numberedList(['Foo', 'Bar', 'Baz'])->getMarkdown();
 #### Numbered list callable
 
 ```php
-echo Markdown::builder()->numberedList(static function (NumberedListBuilder $builder) {
+Markdown::builder()
+    ->numberedList(static function (NumberedListBuilder $builder) {
         $builder->addLine(
             'Hallo',
             'foo',
@@ -232,7 +233,8 @@ echo Markdown::builder()->numberedList(static function (NumberedListBuilder $bui
 #### Checklist
 
 ```php
-echo Markdown::builder()->checklist([
+Markdown::builder()
+    ->checklist([
         'Hallo' => false,
         'foo' => false,
         'bar' => true,
@@ -248,7 +250,8 @@ echo Markdown::builder()->checklist([
 #### Checklist callable
 
 ```php
-echo Markdown::builder()->checklist(static function (ChecklistBuilder $builder): void {
+Markdown::builder()
+    ->checklist(static function (ChecklistBuilder $builder): void {
         $builder
             ->addLine('Hallo', false)
             ->addLine('foo', false)
@@ -265,7 +268,7 @@ echo Markdown::builder()->checklist(static function (ChecklistBuilder $builder):
 #### Table
 
 ```php
-echo Markdown::builder()
+Markdown::builder()
     ->table(
         ['First Header', 'Second Header'],
         [
@@ -286,7 +289,7 @@ Content in the first column | Content in the second column
 #### Table callable values
 
 ```php
-echo $builder = Markdown::builder()
+$builder = Markdown::builder()
     ->table(
         ['First Header', 'Second Header'],
         static function (TableBuilder $builder): void {
@@ -311,7 +314,7 @@ Content in the first column | Content in the second column
 #### Bold
 
 ```php
-echo Markdown::bold('Hey!');
+Markdown::bold('Hey!');
 ```
 
 ```markdown
@@ -321,7 +324,7 @@ echo Markdown::bold('Hey!');
 #### Italic
 
 ```php
-echo Markdown::italic('huhu');
+Markdown::italic('huhu');
 ```
 
 ```markdown
@@ -331,7 +334,7 @@ echo Markdown::italic('huhu');
 #### Code
 
 ```php
-echo Markdown::code('$var = "test";');
+Markdown::code('$var = "test";');
 ```
 
 ```markdown
@@ -341,7 +344,7 @@ echo Markdown::code('$var = "test";');
 #### Link
 
 ```php
-echo Markdown::link('https://google.com', 'Google');
+Markdown::link('https://google.com', 'Google');
 ```
 
 ```markdown
@@ -351,7 +354,7 @@ echo Markdown::link('https://google.com', 'Google');
 #### img
 
 ```php
-echo Markdown::img('cat.jpg', 'Cat');
+Markdown::img('cat.jpg', 'Cat');
 ```
 
 ```markdown
@@ -361,7 +364,7 @@ echo Markdown::img('cat.jpg', 'Cat');
 #### Numbered list
 
 ```php
-echo Markdown::numberedList(['A', 'B', 'C']);
+Markdown::numberedList(['A', 'B', 'C']);
 ```
 
 ```markdown
@@ -373,7 +376,7 @@ echo Markdown::numberedList(['A', 'B', 'C']);
 #### Bulleted list
 
 ```php
-echo Markdown::bulletedList(['A', 'B', 'C']);
+Markdown::bulletedList(['A', 'B', 'C']);
 ```
 
 ```markdown
@@ -385,7 +388,7 @@ echo Markdown::bulletedList(['A', 'B', 'C']);
 #### Checklist
 
 ```php
-echo Markdown::checklist(['A' => true, 'B' => true, 'C' => false]);
+Markdown::checklist(['A' => true, 'B' => true, 'C' => false]);
 ```
 
 ```markdown
@@ -401,7 +404,7 @@ echo Markdown::checklist(['A' => true, 'B' => true, 'C' => false]);
 if you need collapse blocks, you can create a new builder instance with his own clean buffer.
 
 ```php
-echo Markdown::builder()
+Markdown::builder()
     ->blockquote(
         Markdown::builder()
           ->h1('Lists')
@@ -430,7 +433,7 @@ echo Markdown::builder()
 If you want to add blocks from complex logic or iterable value, but don't want to stop chain calls you can use callback.
 
 ```php
-echo Markdown::builder()
+Markdown::builder()
     ->p('Callback Example')
     ->callback(static function (Builder $builder) {
         foreach ([1, 2, 3] as $item) {
