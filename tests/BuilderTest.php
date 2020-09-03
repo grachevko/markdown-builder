@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Premier\MarkdownBuilder\Builder;
 use Premier\MarkdownBuilder\BulletedListBuilder;
 use Premier\MarkdownBuilder\Markdown;
+use Premier\MarkdownBuilder\NumberedListBuilder;
 use Premier\MarkdownBuilder\TableBuilder;
 
 class BuilderTest extends TestCase
@@ -196,6 +197,25 @@ class BuilderTest extends TestCase
             'foo',
             'bar',
         ]);
+
+        static::assertSame($markdown, $builder->getMarkdown());
+    }
+
+    public function testNumberedCallableList(): void
+    {
+        $markdown = <<<'MARKDOWN'
+            1. Hallo
+            2. foo
+            3. bar
+            MARKDOWN;
+
+        $builder = Markdown::builder()->numberedList(static function (NumberedListBuilder $builder): void {
+            $builder->addLine(
+                'Hallo',
+                'foo',
+                'bar',
+            );
+        });
 
         static::assertSame($markdown, $builder->getMarkdown());
     }

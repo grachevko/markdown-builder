@@ -187,6 +187,24 @@ echo Markdown::builder()->numberedList(['Foo', 'Bar', 'Baz'])->getMarkdown();
 3. Baz
 ```
 
+#### Numbered list callable
+
+```php
+echo Markdown::builder()->numberedList(static function (NumberedListBuilder $builder) {
+        $builder->addLine(
+            'Hallo',
+            'foo',
+            'bar',
+        );
+    })->getMarkdown();
+```
+
+```markdown
+1. Hallo
+2. foo
+3. bar
+```
+
 #### hr
 
 ```php

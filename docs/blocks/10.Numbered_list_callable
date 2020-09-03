@@ -1,0 +1,7 @@
+Markdown::builder()->numberedList(static function (NumberedListBuilder $builder) {
+        $builder->addLine(
+            'Hallo',
+            'foo',
+            'bar',
+        );
+    })->getMarkdown();

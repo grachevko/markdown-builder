@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Premier\MarkdownBuilder;
 
 use function array_map;
-use function array_values;
 use function explode;
 use function implode;
 use function is_callable;
@@ -130,25 +129,19 @@ final class Builder
     }
 
     /**
-     * @param array<int, string> $list
+     * @param array<int, string>|callable $list
      */
-    public function numberedList(array $list): self
+    public function numberedList($list): self
     {
-        foreach (array_values($list) as $key => $element) {
-            $lines = explode(PHP_EOL, $element);
+        $this->blocks[] = $builder = new NumberedListBuilder();
 
-            foreach ($lines as $i => $line) {
-                $line = trim($line);
+        if (is_callable($list)) {
+            $list($builder);
 
-                if (0 === $i) {
-                    $this->blocks[] = ($key + 1).'. '.$line.PHP_EOL;
-                } else {
-                    $this->blocks[] = '   '.$line.PHP_EOL;
-                }
-            }
+            return $this;
         }
 
-        $this->blocks[] = PHP_EOL;
+        $builder->addLine(...$list);
 
         return $this;
     }
