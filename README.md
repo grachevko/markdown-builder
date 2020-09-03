@@ -144,6 +144,28 @@ echo Markdown::builder()->blockquote("Foo\nBar\nBaz")->getMarkdown();
 >  Baz
 ```
 
+#### hr
+
+```php
+echo Markdown::builder()->hr()->getMarkdown();
+```
+
+```markdown
+---------------------------------------
+```
+
+#### Code
+
+```php
+echo Markdown::builder()->code('$var = "test";', 'php')->getMarkdown();
+```
+
+````markdown
+```php
+$var = "test";
+```
+````
+
 #### Bulleted list
 
 ```php
@@ -204,28 +226,6 @@ echo Markdown::builder()->numberedList(static function (NumberedListBuilder $bui
 2. foo
 3. bar
 ```
-
-#### hr
-
-```php
-echo Markdown::builder()->hr()->getMarkdown();
-```
-
-```markdown
----------------------------------------
-```
-
-#### Code
-
-```php
-echo Markdown::builder()->code('$var = "test";', 'php')->getMarkdown();
-```
-
-````markdown
-```php
-$var = "test";
-```
-````
 
 #### Table
 

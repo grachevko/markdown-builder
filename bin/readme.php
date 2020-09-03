@@ -24,7 +24,7 @@ $parseDirCallback = static function (Builder $builder, string $dir) use ($codeAn
         }
 
         $builder
-            ->h4(\substr(\str_replace('_', ' ', $file), 3))
+            ->h4(\substr(\str_replace('_', ' ', $file), 4))
             ->callback($codeAndMarkdownCallback, \file_get_contents($dir.'/'.$file));
     }
 };
