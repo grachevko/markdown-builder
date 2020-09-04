@@ -1,1 +1,1 @@
-Markdown::builder()->h3('Hello H3')->getMarkdown();
+Markdown::builder()->h3('Hello H3');

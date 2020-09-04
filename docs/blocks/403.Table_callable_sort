@@ -1,11 +1,10 @@
-Markdown::builder()
-    ->table(
-        ['First Header', 'Second Header'],
-        static function (TableBuilder $builder): void {
-            $builder
-                ->addRow('C', 'Content from cell C')
-                ->addRow('A', 'Content from cell A')
-                ->addRow('B', 'Content from cell B')
-                ->sort(fn (array $left, array $right) => $left[0] <=> $right[0]);
-        },
-    )->getMarkdown();
+Markdown::builder()->table(
+    ['First Header', 'Second Header'],
+    static function (TableBuilder $builder): void {
+        $builder
+            ->addRow('C', 'Content from cell C')
+            ->addRow('A', 'Content from cell A')
+            ->addRow('B', 'Content from cell B')
+            ->sort(fn (array $left, array $right) => $left[0] <=> $right[0]);
+    },
+);

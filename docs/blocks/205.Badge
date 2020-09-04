@@ -1,6 +1,5 @@
-Markdown::builder()
-    ->badge(
-        'Latest Stable Version',
-        'https://poser.pugx.org/premier/markdown-builder/v',
-        '//packagist.org/packages/premier/markdown-builder',
-    )->getMarkdown();
+Markdown::builder()->badge(
+    'Latest Stable Version',
+    'https://poser.pugx.org/premier/markdown-builder/v',
+    '//packagist.org/packages/premier/markdown-builder',
+);

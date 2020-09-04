@@ -1,6 +1,5 @@
-Markdown::builder()
-    ->checklist([
-        [false, 'Hallo'],
-        [false, 'foo'],
-        [true, 'bar'],
-    ])->getMarkdown();
+Markdown::builder()->checklist([
+    [false, 'Hallo'],
+    [false, 'foo'],
+    [true, 'bar'],
+]);

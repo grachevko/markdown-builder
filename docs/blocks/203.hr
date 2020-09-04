@@ -1,1 +1,1 @@
-Markdown::builder()->hr()->getMarkdown();
+Markdown::builder()->hr();

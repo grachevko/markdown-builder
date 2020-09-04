@@ -10,7 +10,7 @@ require_once \dirname(__DIR__).'/vendor/autoload.php';
 $codeAndMarkdownCallback = static function (Builder $builder, string $code): void {
     $builder
         ->code(''.\trim($code), 'php')
-        ->code(eval('use Premier\MarkdownBuilder\{Markdown, Builder, TableBuilder, BulletedListBuilder, NumberedListBuilder, ChecklistBuilder}; return '.$code), 'markdown');
+        ->code(eval('use Premier\MarkdownBuilder\{Markdown, Builder, TableBuilder, BulletedListBuilder, NumberedListBuilder, ChecklistBuilder}; return (string) '.$code), 'markdown');
 };
 
 $parseFileCallback = static function (Builder $builder, string $file) use ($codeAndMarkdownCallback): void {

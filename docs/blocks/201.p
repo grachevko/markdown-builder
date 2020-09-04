@@ -1,1 +1,1 @@
-Markdown::builder()->p('paragraph')->getMarkdown();
+Markdown::builder()->p('paragraph');

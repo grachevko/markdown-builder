@@ -1,9 +1,8 @@
-Markdown::builder()
-    ->numberedList(static function (NumberedListBuilder $builder) {
-        $builder
-            ->addLine('A')
-            ->addLine('D')
-            ->addLine('B')
-            ->addLine('C')
-            ->sort(fn (string $left, string $right) => $left <=> $right);
-    })->getMarkdown();
+Markdown::builder()->numberedList(static function (NumberedListBuilder $builder) {
+    $builder
+        ->addLine('A')
+        ->addLine('D')
+        ->addLine('B')
+        ->addLine('C')
+        ->sort(fn (string $left, string $right) => $left <=> $right);
+});

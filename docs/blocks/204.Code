@@ -1,1 +1,1 @@
-Markdown::builder()->code('$var = "test";', 'php')->getMarkdown();
+Markdown::builder()->code('$var = "test";', 'php');

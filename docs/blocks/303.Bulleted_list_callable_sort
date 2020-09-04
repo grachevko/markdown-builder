@@ -1,9 +1,8 @@
-Markdown::builder()
-    ->bulletedList(static function (BulletedListBuilder $builder): void {
-        $builder
-            ->addLine('C')
-            ->addLine('A')
-            ->addLine('B')
-            ->addLine('D')
-            ->sort(fn (string $left, string $right) => $left <=> $right);
-    })->getMarkdown();
+Markdown::builder()->bulletedList(static function (BulletedListBuilder $builder): void {
+    $builder
+        ->addLine('C')
+        ->addLine('A')
+        ->addLine('B')
+        ->addLine('D')
+        ->sort(fn (string $left, string $right) => $left <=> $right);
+});

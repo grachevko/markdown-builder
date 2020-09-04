@@ -75,7 +75,7 @@ The markdown builder have two kinds of elements, block and inline elements.
 #### h1
 
 ```php
-Markdown::builder()->h1('Hello H1')->getMarkdown();
+Markdown::builder()->h1('Hello H1');
 ```
 
 ```markdown
@@ -86,7 +86,7 @@ Hello H1
 #### h2
 
 ```php
-Markdown::builder()->h2('Hello H2')->getMarkdown();
+Markdown::builder()->h2('Hello H2');
 ```
 
 ```markdown
@@ -97,7 +97,7 @@ Hello H2
 #### h3
 
 ```php
-Markdown::builder()->h3('Hello H3')->getMarkdown();
+Markdown::builder()->h3('Hello H3');
 ```
 
 ```markdown
@@ -107,7 +107,7 @@ Markdown::builder()->h3('Hello H3')->getMarkdown();
 #### h4
 
 ```php
-Markdown::builder()->h4('Hello H4')->getMarkdown();
+Markdown::builder()->h4('Hello H4');
 ```
 
 ```markdown
@@ -117,7 +117,7 @@ Markdown::builder()->h4('Hello H4')->getMarkdown();
 #### h5
 
 ```php
-Markdown::builder()->h5('Hello H5')->getMarkdown();
+Markdown::builder()->h5('Hello H5');
 ```
 
 ```markdown
@@ -127,7 +127,7 @@ Markdown::builder()->h5('Hello H5')->getMarkdown();
 #### h6
 
 ```php
-Markdown::builder()->h6('Hello H6')->getMarkdown();
+Markdown::builder()->h6('Hello H6');
 ```
 
 ```markdown
@@ -137,7 +137,7 @@ Markdown::builder()->h6('Hello H6')->getMarkdown();
 #### p
 
 ```php
-Markdown::builder()->p('paragraph')->getMarkdown();
+Markdown::builder()->p('paragraph');
 ```
 
 ```markdown
@@ -147,7 +147,7 @@ paragraph
 #### Blockquote
 
 ```php
-Markdown::builder()->blockquote("Foo\nBar\nBaz")->getMarkdown();
+Markdown::builder()->blockquote("Foo\nBar\nBaz");
 ```
 
 ```markdown
@@ -159,7 +159,7 @@ Markdown::builder()->blockquote("Foo\nBar\nBaz")->getMarkdown();
 #### hr
 
 ```php
-Markdown::builder()->hr()->getMarkdown();
+Markdown::builder()->hr();
 ```
 
 ```markdown
@@ -169,7 +169,7 @@ Markdown::builder()->hr()->getMarkdown();
 #### Code
 
 ```php
-Markdown::builder()->code('$var = "test";', 'php')->getMarkdown();
+Markdown::builder()->code('$var = "test";', 'php');
 ```
 
 ````markdown
@@ -181,12 +181,11 @@ $var = "test";
 #### Badge
 
 ```php
-Markdown::builder()
-    ->badge(
-        'Latest Stable Version',
-        'https://poser.pugx.org/premier/markdown-builder/v',
-        '//packagist.org/packages/premier/markdown-builder',
-    )->getMarkdown();
+Markdown::builder()->badge(
+    'Latest Stable Version',
+    'https://poser.pugx.org/premier/markdown-builder/v',
+    '//packagist.org/packages/premier/markdown-builder',
+);
 ```
 
 ```markdown
@@ -196,7 +195,7 @@ Markdown::builder()
 #### Bulleted list
 
 ```php
-Markdown::builder()->bulletedList(['Foo', 'Bar', 'Baz'])->getMarkdown();
+Markdown::builder()->bulletedList(['Foo', 'Bar', 'Baz']);
 ```
 
 ```markdown
@@ -208,13 +207,12 @@ Markdown::builder()->bulletedList(['Foo', 'Bar', 'Baz'])->getMarkdown();
 #### Bulleted list callable
 
 ```php
-Markdown::builder()
-    ->bulletedList(static function (BulletedListBuilder $builder): void {
-        $builder
-            ->addLine('Hallo')
-            ->addLine('foo')
-            ->addLine('bar');
-    })->getMarkdown();
+Markdown::builder()->bulletedList(static function (BulletedListBuilder $builder): void {
+    $builder
+        ->addLine('Hallo')
+        ->addLine('foo')
+        ->addLine('bar');
+});
 ```
 
 ```markdown
@@ -226,15 +224,14 @@ Markdown::builder()
 #### Bulleted list callable sort
 
 ```php
-Markdown::builder()
-    ->bulletedList(static function (BulletedListBuilder $builder): void {
-        $builder
-            ->addLine('C')
-            ->addLine('A')
-            ->addLine('B')
-            ->addLine('D')
-            ->sort(fn (string $left, string $right) => $left <=> $right);
-    })->getMarkdown();
+Markdown::builder()->bulletedList(static function (BulletedListBuilder $builder): void {
+    $builder
+        ->addLine('C')
+        ->addLine('A')
+        ->addLine('B')
+        ->addLine('D')
+        ->sort(fn (string $left, string $right) => $left <=> $right);
+});
 ```
 
 ```markdown
@@ -247,7 +244,7 @@ Markdown::builder()
 #### Numbered list
 
 ```php
-Markdown::builder()->numberedList(['Foo', 'Bar', 'Baz'])->getMarkdown();
+Markdown::builder()->numberedList(['Foo', 'Bar', 'Baz']);
 ```
 
 ```markdown
@@ -259,13 +256,12 @@ Markdown::builder()->numberedList(['Foo', 'Bar', 'Baz'])->getMarkdown();
 #### Numbered list callable
 
 ```php
-Markdown::builder()
-    ->numberedList(static function (NumberedListBuilder $builder) {
-        $builder
-            ->addLine('Hallo')
-            ->addLine('foo')
-            ->addLine('bar');
-    })->getMarkdown();
+Markdown::builder()->numberedList(static function (NumberedListBuilder $builder) {
+    $builder
+        ->addLine('Hallo')
+        ->addLine('foo')
+        ->addLine('bar');
+});
 ```
 
 ```markdown
@@ -277,15 +273,14 @@ Markdown::builder()
 #### Numbered list callable sort
 
 ```php
-Markdown::builder()
-    ->numberedList(static function (NumberedListBuilder $builder) {
-        $builder
-            ->addLine('A')
-            ->addLine('D')
-            ->addLine('B')
-            ->addLine('C')
-            ->sort(fn (string $left, string $right) => $left <=> $right);
-    })->getMarkdown();
+Markdown::builder()->numberedList(static function (NumberedListBuilder $builder) {
+    $builder
+        ->addLine('A')
+        ->addLine('D')
+        ->addLine('B')
+        ->addLine('C')
+        ->sort(fn (string $left, string $right) => $left <=> $right);
+});
 ```
 
 ```markdown
@@ -298,12 +293,11 @@ Markdown::builder()
 #### Checklist
 
 ```php
-Markdown::builder()
-    ->checklist([
-        [false, 'Hallo'],
-        [false, 'foo'],
-        [true, 'bar'],
-    ])->getMarkdown();
+Markdown::builder()->checklist([
+    [false, 'Hallo'],
+    [false, 'foo'],
+    [true, 'bar'],
+]);
 ```
 
 ```markdown
@@ -315,13 +309,12 @@ Markdown::builder()
 #### Checklist callable
 
 ```php
-Markdown::builder()
-    ->checklist(static function (ChecklistBuilder $builder): void {
-        $builder
-            ->addLine(false, 'Hallo')
-            ->addLine(false, 'foo')
-            ->addLine(true, 'bar');
-    })->getMarkdown();
+Markdown::builder()->checklist(static function (ChecklistBuilder $builder): void {
+    $builder
+        ->addLine(false, 'Hallo')
+        ->addLine(false, 'foo')
+        ->addLine(true, 'bar');
+});
 ```
 
 ```markdown
@@ -333,15 +326,14 @@ Markdown::builder()
 #### Checklist callable sort
 
 ```php
-Markdown::builder()
-    ->checklist(static function (ChecklistBuilder $builder): void {
-        $builder
-            ->addLine(false, 'C')
-            ->addLine(false, 'D')
-            ->addLine(true, 'B')
-            ->addLine(true, 'A')
-            ->sort(fn (array $left, array $right) => $left[1] <=> $right[1]);
-    })->getMarkdown();
+Markdown::builder()->checklist(static function (ChecklistBuilder $builder): void {
+    $builder
+        ->addLine(false, 'C')
+        ->addLine(false, 'D')
+        ->addLine(true, 'B')
+        ->addLine(true, 'A')
+        ->sort(fn (array $left, array $right) => $left[1] <=> $right[1]);
+});
 ```
 
 ```markdown
@@ -354,14 +346,13 @@ Markdown::builder()
 #### Table
 
 ```php
-Markdown::builder()
-    ->table(
-        ['First Header', 'Second Header'],
-        [
-            ['Content from cell 1', 'Content from cell 2'],
-            ['Content in the first column', 'Content in the second column'],
-        ]
-    )->getMarkdown();
+Markdown::builder()->table(
+    ['First Header', 'Second Header'],
+    [
+        ['Content from cell 1', 'Content from cell 2'],
+        ['Content in the first column', 'Content in the second column'],
+    ]
+);
 ```
 
 ```markdown
@@ -374,15 +365,14 @@ Content in the first column | Content in the second column
 #### Table callable
 
 ```php
-Markdown::builder()
-    ->table(
-        ['First Header', 'Second Header'],
-        static function (TableBuilder $builder): void {
-            $builder
-                ->addRow('Content from cell 1', 'Content from cell 2')
-                ->addRow('Content in the first column', 'Content in the second column');
-        },
-    )->getMarkdown();
+Markdown::builder()->table(
+    ['First Header', 'Second Header'],
+    static function (TableBuilder $builder): void {
+        $builder
+            ->addRow('Content from cell 1', 'Content from cell 2')
+            ->addRow('Content in the first column', 'Content in the second column');
+    },
+);
 ```
 
 ```markdown
@@ -395,17 +385,16 @@ Content in the first column | Content in the second column
 #### Table callable sort
 
 ```php
-Markdown::builder()
-    ->table(
-        ['First Header', 'Second Header'],
-        static function (TableBuilder $builder): void {
-            $builder
-                ->addRow('C', 'Content from cell C')
-                ->addRow('A', 'Content from cell A')
-                ->addRow('B', 'Content from cell B')
-                ->sort(fn (array $left, array $right) => $left[0] <=> $right[0]);
-        },
-    )->getMarkdown();
+Markdown::builder()->table(
+    ['First Header', 'Second Header'],
+    static function (TableBuilder $builder): void {
+        $builder
+            ->addRow('C', 'Content from cell C')
+            ->addRow('A', 'Content from cell A')
+            ->addRow('B', 'Content from cell B')
+            ->sort(fn (array $left, array $right) => $left[0] <=> $right[0]);
+    },
+);
 ```
 
 ```markdown
@@ -419,23 +408,22 @@ C | Content from cell C
 #### Table with nested list
 
 ```php
-Markdown::builder()
-    ->table(
-        ['First Header', 'Second Header'],
-        static function (TableBuilder $builder): void {
-            $builder
-                ->addRow('A', Markdown::listAsHtml(Markdown::checklist([
-                    [true, 'A'],
-                    [false, 'B'],
-                    [false, 'C'],
-                ])))
-                ->addRow('B', Markdown::listAsHtml(Markdown::checklist([
-                    [true, 'D'],
-                    [false, 'E'],
-                    [false, 'F'],
-                ])));
-        },
-    )->getMarkdown();
+Markdown::builder()->table(
+    ['First Header', 'Second Header'],
+    static function (TableBuilder $builder): void {
+        $builder
+            ->addRow('A', Markdown::listAsHtml(Markdown::checklist([
+                [true, 'A'],
+                [false, 'B'],
+                [false, 'C'],
+            ])))
+            ->addRow('B', Markdown::listAsHtml(Markdown::checklist([
+                [true, 'D'],
+                [false, 'E'],
+                [false, 'F'],
+            ])));
+    },
+);
 ```
 
 ```markdown
