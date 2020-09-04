@@ -1,5 +1,5 @@
 Markdown::checklist([
-    ['A', true],
-    ['B', true],
-    ['C', false],
+    [true, 'A'],
+    [true, 'B'],
+    [false, 'C'],
 ]);

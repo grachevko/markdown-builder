@@ -28,11 +28,11 @@ Markdown::builder()
     ->code('composer require premier/markdown-builder', 'bash')
     ->h2('Todos')
     ->checklist([
-        ['write tests', true],
-        [Markdown::numberedList(['TableBuilder', 'ListBuilders', 'Checklist']), true],
-        ['add more markdown features', false],
-        ['Configure CI', true],
-        ['CI readme check', false],
+        [true, 'write tests'],
+        [true, Markdown::numberedList(['TableBuilder', 'ListBuilders', 'Checklist'])],
+        [false, 'add more markdown features'],
+        [true, 'Configure CI'],
+        [false, 'CI readme check'],
     ])
     ->getMarkdown();
 ```
@@ -299,9 +299,9 @@ Markdown::builder()
 ```php
 Markdown::builder()
     ->checklist([
-        ['Hallo', false],
-        ['foo', false],
-        ['bar', true],
+        [false, 'Hallo'],
+        [false, 'foo'],
+        [true, 'bar'],
     ])->getMarkdown();
 ```
 
@@ -317,9 +317,9 @@ Markdown::builder()
 Markdown::builder()
     ->checklist(static function (ChecklistBuilder $builder): void {
         $builder
-            ->addLine('Hallo', false)
-            ->addLine('foo', false)
-            ->addLine('bar', true);
+            ->addLine(false, 'Hallo')
+            ->addLine(false, 'foo')
+            ->addLine(true, 'bar');
     })->getMarkdown();
 ```
 
@@ -335,11 +335,11 @@ Markdown::builder()
 Markdown::builder()
     ->checklist(static function (ChecklistBuilder $builder): void {
         $builder
-            ->addLine('C', false)
-            ->addLine('D', false)
-            ->addLine('B', true)
-            ->addLine('A', true)
-            ->sort(fn (array $left, array $right) => $left[0] <=> $right[0]);
+            ->addLine(false, 'C')
+            ->addLine(false, 'D')
+            ->addLine(true, 'B')
+            ->addLine(true, 'A')
+            ->sort(fn (array $left, array $right) => $left[1] <=> $right[1]);
     })->getMarkdown();
 ```
 
@@ -512,9 +512,9 @@ Markdown::bulletedList(['A', 'B', 'C']);
 
 ```php
 Markdown::checklist([
-    ['A', true],
-    ['B', true],
-    ['C', false],
+    [true, 'A'],
+    [true, 'B'],
+    [false, 'C'],
 ]);
 ```
 

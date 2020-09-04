@@ -144,7 +144,7 @@ final class Builder implements Block
     }
 
     /**
-     * @param array<int, array{string, bool}>|callable $list
+     * @param array<int, array{bool, string}>|callable $list
      */
     public function checklist($list): self
     {

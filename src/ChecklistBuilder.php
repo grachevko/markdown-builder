@@ -11,12 +11,12 @@ use function usort;
 final class ChecklistBuilder implements Block
 {
     /**
-     * @var array<int, array{string, bool}>
+     * @var array<int, array{bool, string}>
      */
     private array $lines;
 
     /**
-     * @param array<int, array{string, bool}> $lines
+     * @param array<int, array{bool, string}> $lines
      */
     public function __construct(array $lines = [])
     {
@@ -28,9 +28,9 @@ final class ChecklistBuilder implements Block
         return $this->getMarkdown();
     }
 
-    public function addLine(string $line, bool $checked): self
+    public function addLine(bool $checked, string $line): self
     {
-        $this->lines[] = [$line, $checked];
+        $this->lines[] = [$checked, $line];
 
         return $this;
     }
@@ -49,7 +49,7 @@ final class ChecklistBuilder implements Block
     {
         $markdown = '';
 
-        foreach ($this->lines as [$element, $checked]) {
+        foreach ($this->lines as [$checked, $element]) {
             $lines = explode(PHP_EOL, $element);
 
             foreach ($lines as $i => $line) {

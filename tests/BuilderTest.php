@@ -311,9 +311,9 @@ class BuilderTest extends TestCase
             MARKDOWN;
 
         $builder = Markdown::builder()->checklist([
-            ['Hallo', false],
-            ['foo', false],
-            ['bar', true],
+            [false, 'Hallo'],
+            [false, 'foo'],
+            [true, 'bar'],
         ]);
 
         static::assertSame($markdown, $builder->getMarkdown());
@@ -330,9 +330,9 @@ class BuilderTest extends TestCase
             MARKDOWN;
 
         $builder = Markdown::builder()->checklist([
-            ['Hallo', false],
-            [Markdown::numberedList(['foo', 'bar', 'baz']), false],
-            ['bar', true],
+            [false, 'Hallo'],
+            [false, Markdown::numberedList(['foo', 'bar', 'baz'])],
+            [true, 'bar'],
         ]);
 
         static::assertSame($markdown, $builder->getMarkdown());
@@ -348,9 +348,9 @@ class BuilderTest extends TestCase
 
         $builder = Markdown::builder()->checklist(static function (ChecklistBuilder $builder): void {
             $builder
-                ->addLine('Hallo', false)
-                ->addLine('foo', false)
-                ->addLine('bar', true);
+                ->addLine(false, 'Hallo')
+                ->addLine(false, 'foo')
+                ->addLine(true, 'bar');
         });
 
         static::assertSame($markdown, $builder->getMarkdown());
@@ -366,10 +366,10 @@ class BuilderTest extends TestCase
 
         $builder = Markdown::builder()->checklist(static function (ChecklistBuilder $builder): void {
             $builder
-                ->addLine('B', false)
-                ->addLine('C', true)
-                ->addLine('A', false)
-                ->sort(fn (array $left, array $right) => $left[0] <=> $right[0]);
+                ->addLine(false, 'B')
+                ->addLine(true, 'C')
+                ->addLine(false, 'A')
+                ->sort(fn (array $left, array $right) => $left[1] <=> $right[1]);
         });
 
         static::assertSame($markdown, $builder->getMarkdown());

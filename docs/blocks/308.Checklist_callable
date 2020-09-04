@@ -1,7 +1,7 @@
 Markdown::builder()
     ->checklist(static function (ChecklistBuilder $builder): void {
         $builder
-            ->addLine('Hallo', false)
-            ->addLine('foo', false)
-            ->addLine('bar', true);
+            ->addLine(false, 'Hallo')
+            ->addLine(false, 'foo')
+            ->addLine(true, 'bar');
     })->getMarkdown();
