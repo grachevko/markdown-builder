@@ -217,20 +217,20 @@ final class Builder implements Block
     }
 
     /**
-     * @param array<int, string>            $headers
-     * @param iterable<int, array>|callable $values
+     * @param array<int, string>         $headers
+     * @param array<int, array>|callable $values
      */
     public function table(array $headers, $values): self
     {
-        $this->blocks[] = $tableBuilder = new TableBuilder($headers);
-
         if (is_callable($values)) {
+            $this->blocks[] = $tableBuilder = new TableBuilder($headers);
+
             $values($tableBuilder);
 
             return $this;
         }
 
-        $tableBuilder->addRow(...$values);
+        $this->blocks[] = $tableBuilder = new TableBuilder($headers, $values);
 
         return $this;
     }

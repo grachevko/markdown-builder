@@ -380,10 +380,9 @@ $builder = Markdown::builder()
     ->table(
         ['First Header', 'Second Header'],
         static function (TableBuilder $builder): void {
-            $builder->addRow(
-                ['Content from cell 1', 'Content from cell 2'],
-                ['Content in the first column', 'Content in the second column'],
-            );
+            $builder
+                ->addRow('Content from cell 1', 'Content from cell 2')
+                ->addRow('Content in the first column', 'Content in the second column');
         },
     )
     ->getMarkdown();
@@ -403,11 +402,11 @@ $builder = Markdown::builder()
     ->table(
         ['First Header', 'Second Header'],
         static function (TableBuilder $builder): void {
-            $builder->addRow(
-                ['C', 'Content from cell C'],
-                ['A', 'Content from cell A'],
-                ['B', 'Content from cell B'],
-            )->sort(fn (array $left, array $right) => $left[0] <=> $right[0]);
+            $builder
+                ->addRow('C', 'Content from cell C')
+                ->addRow('A', 'Content from cell A')
+                ->addRow('B', 'Content from cell B')
+                ->sort(fn (array $left, array $right) => $left[0] <=> $right[0]);
         },
     )
     ->getMarkdown();

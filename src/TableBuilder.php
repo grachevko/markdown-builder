@@ -21,14 +21,16 @@ final class TableBuilder implements Block
     /**
      * @var array<int, array<int, string>>
      */
-    private array $rows = [];
+    private array $rows;
 
     /**
-     * @param array<int, string> $headers
+     * @param array<int, string>             $headers
+     * @param array<int, array<int, string>> $rows
      */
-    public function __construct(array $headers)
+    public function __construct(array $headers, array $rows = [])
     {
         $this->headers = $headers;
+        $this->rows = $rows;
     }
 
     public function __toString(): string
@@ -36,12 +38,9 @@ final class TableBuilder implements Block
         return $this->getMarkdown();
     }
 
-    /**
-     * @param array<int, string> $row
-     */
-    public function addRow(array ...$row): self
+    public function addRow(string ...$row): self
     {
-        $this->rows = [...$this->rows, ...$row];
+        $this->rows[] = $row;
 
         return $this;
     }
