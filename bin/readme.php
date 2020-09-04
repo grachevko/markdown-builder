@@ -46,6 +46,11 @@ Markdown::builder()
         '//packagist.org/packages/premier/markdown-builder',
     )
     ->badge(
+        'Dependents',
+        'https://poser.pugx.org/premier/markdown-builder/dependents',
+        '//packagist.org/packages/premier/markdown-builder',
+    )
+    ->badge(
         'License',
         'https://poser.pugx.org/premier/markdown-builder/license',
         '//packagist.org/packages/premier/markdown-builder',

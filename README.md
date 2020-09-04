@@ -1,6 +1,7 @@
 [![Latest Stable Version](https://poser.pugx.org/premier/markdown-builder/v)](//packagist.org/packages/premier/markdown-builder)
 [![Total Downloads](https://poser.pugx.org/premier/markdown-builder/downloads)](//packagist.org/packages/premier/markdown-builder)
 [![Latest Unstable Version](https://poser.pugx.org/premier/markdown-builder/v/unstable)](//packagist.org/packages/premier/markdown-builder)
+[![Dependents](https://poser.pugx.org/premier/markdown-builder/dependents)](//packagist.org/packages/premier/markdown-builder)
 [![License](https://poser.pugx.org/premier/markdown-builder/license)](//packagist.org/packages/premier/markdown-builder)
 
 Markdown Builder
