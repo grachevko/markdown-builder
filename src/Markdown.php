@@ -83,4 +83,9 @@ final class Markdown
             ->checklist($list)
             ->getMarkdown();
     }
+
+    public static function badge(string $title, string $img, string $url): string
+    {
+        return self::builder()->badge($title, $img, $url)->getMarkdown();
+    }
 }
