@@ -1,1 +1,5 @@
-Markdown::checklist(['A' => true, 'B' => true, 'C' => false]);
+Markdown::checklist([
+    ['A', true],
+    ['B', true],
+    ['C', false],
+]);

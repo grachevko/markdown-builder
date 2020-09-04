@@ -75,7 +75,7 @@ final class Markdown
     }
 
     /**
-     * @param array<string, bool>|callable $list
+     * @param array<int, array{string, bool}>|callable $list
      */
     public static function checklist($list): string
     {

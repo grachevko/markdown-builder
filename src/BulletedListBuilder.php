@@ -13,16 +13,24 @@ final class BulletedListBuilder implements Block
     /**
      * @var array<int, string>
      */
-    private array $lines = [];
+    private array $lines;
+
+    /**
+     * @param array<int, string> $lines
+     */
+    public function __construct(array $lines = [])
+    {
+        $this->lines = $lines;
+    }
 
     public function __toString(): string
     {
         return $this->getMarkdown();
     }
 
-    public function addLine(string ...$line): self
+    public function addLine(string $line): self
     {
-        $this->lines = [...$this->lines, ...$line];
+        $this->lines[] = $line;
 
         return $this;
     }

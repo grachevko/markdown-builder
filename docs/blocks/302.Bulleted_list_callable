@@ -1,8 +1,7 @@
 Markdown::builder()
     ->bulletedList(static function (BulletedListBuilder $builder): void {
-        $builder->addLine(
-            'Hallo',
-            'foo',
-            'bar',
-        );
+        $builder
+            ->addLine('Hallo')
+            ->addLine('foo')
+            ->addLine('bar');
     })->getMarkdown();

@@ -5,10 +5,10 @@ Markdown::builder()
     ->code('composer require premier/markdown-builder', 'bash')
     ->h2('Todos')
     ->checklist([
-        'write tests' => true,
-        Markdown::numberedList(['TableBuilder', 'ListBuilders', 'Checklist']) => true,
-        'add more markdown features' => false,
-        'Configure CI' => true,
-        'CI readme check' => false,
+        ['write tests', true],
+        [Markdown::numberedList(['TableBuilder', 'ListBuilders', 'Checklist']), true],
+        ['add more markdown features', false],
+        ['Configure CI', true],
+        ['CI readme check', false],
     ])
     ->getMarkdown();

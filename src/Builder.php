@@ -116,15 +116,13 @@ final class Builder implements Block
      */
     public function bulletedList($list): self
     {
-        $this->blocks[] = $builder = new BulletedListBuilder();
-
         if (is_callable($list)) {
-            $list($builder);
+            $list($this->blocks[] = new BulletedListBuilder());
 
             return $this;
         }
 
-        $builder->addLine(...$list);
+        $this->blocks[] = new BulletedListBuilder($list);
 
         return $this;
     }
@@ -134,35 +132,29 @@ final class Builder implements Block
      */
     public function numberedList($list): self
     {
-        $this->blocks[] = $builder = new NumberedListBuilder();
-
         if (is_callable($list)) {
-            $list($builder);
+            $list($this->blocks[] = new NumberedListBuilder());
 
             return $this;
         }
 
-        $builder->addLine(...$list);
+        $this->blocks[] = new NumberedListBuilder($list);
 
         return $this;
     }
 
     /**
-     * @param array<string, bool>|callable $list
+     * @param array<int, array{string, bool}>|callable $list
      */
     public function checklist($list): self
     {
-        $this->blocks[] = $builder = new ChecklistBuilder();
-
         if (is_callable($list)) {
-            $list($builder);
+            $list($this->blocks[] = new ChecklistBuilder());
 
             return $this;
         }
 
-        foreach ($list as $line => $checked) {
-            $builder->addLine($line, $checked);
-        }
+        $this->blocks[] = new ChecklistBuilder($list);
 
         return $this;
     }

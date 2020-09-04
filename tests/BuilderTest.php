@@ -161,11 +161,10 @@ class BuilderTest extends TestCase
             MARKDOWN;
 
         $builder = Markdown::builder()->bulletedList(static function (BulletedListBuilder $builder): void {
-            $builder->addLine(
-                'Hallo',
-                'foo',
-                'bar',
-            );
+            $builder
+                ->addLine('Hallo')
+                ->addLine('foo')
+                ->addLine('bar');
         });
 
         static::assertSame($markdown, $builder->getMarkdown());
@@ -180,11 +179,11 @@ class BuilderTest extends TestCase
             MARKDOWN;
 
         $builder = Markdown::builder()->bulletedList(static function (BulletedListBuilder $builder): void {
-            $builder->addLine(
-                'B',
-                'C',
-                'A',
-            )->sort(fn (string $left, string $right) => $left <=> $right);
+            $builder
+                ->addLine('B')
+                ->addLine('C')
+                ->addLine('A')
+                ->sort(fn (string $left, string $right) => $left <=> $right);
         });
 
         static::assertSame($markdown, $builder->getMarkdown());
@@ -234,11 +233,10 @@ class BuilderTest extends TestCase
             MARKDOWN;
 
         $builder = Markdown::builder()->numberedList(static function (NumberedListBuilder $builder): void {
-            $builder->addLine(
-                'Hallo',
-                'foo',
-                'bar',
-            );
+            $builder
+                ->addLine('Hallo')
+                ->addLine('foo')
+                ->addLine('bar');
         });
 
         static::assertSame($markdown, $builder->getMarkdown());
@@ -253,11 +251,11 @@ class BuilderTest extends TestCase
             MARKDOWN;
 
         $builder = Markdown::builder()->numberedList(static function (NumberedListBuilder $builder): void {
-            $builder->addLine(
-                'C',
-                'B',
-                'A',
-            )->sort(fn (string $left, string $right) => $left <=> $right);
+            $builder
+                ->addLine('C')
+                ->addLine('B')
+                ->addLine('A')
+                ->sort(fn (string $left, string $right) => $left <=> $right);
         });
 
         static::assertSame($markdown, $builder->getMarkdown());
@@ -313,9 +311,9 @@ class BuilderTest extends TestCase
             MARKDOWN;
 
         $builder = Markdown::builder()->checklist([
-            'Hallo' => false,
-            'foo' => false,
-            'bar' => true,
+            ['Hallo', false],
+            ['foo', false],
+            ['bar', true],
         ]);
 
         static::assertSame($markdown, $builder->getMarkdown());
@@ -332,9 +330,9 @@ class BuilderTest extends TestCase
             MARKDOWN;
 
         $builder = Markdown::builder()->checklist([
-            'Hallo' => false,
-            Markdown::numberedList(['foo', 'bar', 'baz']) => false,
-            'bar' => true,
+            ['Hallo', false],
+            [Markdown::numberedList(['foo', 'bar', 'baz']), false],
+            ['bar', true],
         ]);
 
         static::assertSame($markdown, $builder->getMarkdown());

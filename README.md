@@ -28,11 +28,11 @@ Markdown::builder()
     ->code('composer require premier/markdown-builder', 'bash')
     ->h2('Todos')
     ->checklist([
-        'write tests' => true,
-        Markdown::numberedList(['TableBuilder', 'ListBuilders', 'Checklist']) => true,
-        'add more markdown features' => false,
-        'Configure CI' => true,
-        'CI readme check' => false,
+        ['write tests', true],
+        [Markdown::numberedList(['TableBuilder', 'ListBuilders', 'Checklist']), true],
+        ['add more markdown features', false],
+        ['Configure CI', true],
+        ['CI readme check', false],
     ])
     ->getMarkdown();
 ```
@@ -209,11 +209,10 @@ Markdown::builder()->bulletedList(['Foo', 'Bar', 'Baz'])->getMarkdown();
 ```php
 Markdown::builder()
     ->bulletedList(static function (BulletedListBuilder $builder): void {
-        $builder->addLine(
-            'Hallo',
-            'foo',
-            'bar',
-        );
+        $builder
+            ->addLine('Hallo')
+            ->addLine('foo')
+            ->addLine('bar');
     })->getMarkdown();
 ```
 
@@ -228,12 +227,12 @@ Markdown::builder()
 ```php
 Markdown::builder()
     ->bulletedList(static function (BulletedListBuilder $builder): void {
-        $builder->addLine(
-            'C',
-            'A',
-            'B',
-            'D',
-        )->sort(fn (string $left, string $right) => $left <=> $right);
+        $builder
+            ->addLine('C')
+            ->addLine('A')
+            ->addLine('B')
+            ->addLine('D')
+            ->sort(fn (string $left, string $right) => $left <=> $right);
     })->getMarkdown();
 ```
 
@@ -261,11 +260,10 @@ Markdown::builder()->numberedList(['Foo', 'Bar', 'Baz'])->getMarkdown();
 ```php
 Markdown::builder()
     ->numberedList(static function (NumberedListBuilder $builder) {
-        $builder->addLine(
-            'Hallo',
-            'foo',
-            'bar',
-        );
+        $builder
+            ->addLine('Hallo')
+            ->addLine('foo')
+            ->addLine('bar');
     })->getMarkdown();
 ```
 
@@ -280,12 +278,12 @@ Markdown::builder()
 ```php
 Markdown::builder()
     ->numberedList(static function (NumberedListBuilder $builder) {
-        $builder->addLine(
-            'A',
-            'D',
-            'B',
-            'C',
-        )->sort(fn (string $left, string $right) => $left <=> $right);
+        $builder
+            ->addLine('A')
+            ->addLine('D')
+            ->addLine('B')
+            ->addLine('C')
+            ->sort(fn (string $left, string $right) => $left <=> $right);
     })->getMarkdown();
 ```
 
@@ -301,9 +299,9 @@ Markdown::builder()
 ```php
 Markdown::builder()
     ->checklist([
-        'Hallo' => false,
-        'foo' => false,
-        'bar' => true,
+        ['Hallo', false],
+        ['foo', false],
+        ['bar', true],
     ])->getMarkdown();
 ```
 
@@ -513,7 +511,11 @@ Markdown::bulletedList(['A', 'B', 'C']);
 #### Checklist
 
 ```php
-Markdown::checklist(['A' => true, 'B' => true, 'C' => false]);
+Markdown::checklist([
+    ['A', true],
+    ['B', true],
+    ['C', false],
+]);
 ```
 
 ```markdown

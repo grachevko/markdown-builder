@@ -13,7 +13,15 @@ final class ChecklistBuilder implements Block
     /**
      * @var array<int, array{string, bool}>
      */
-    private array $lines = [];
+    private array $lines;
+
+    /**
+     * @param array<int, array{string, bool}> $lines
+     */
+    public function __construct(array $lines = [])
+    {
+        $this->lines = $lines;
+    }
 
     public function __toString(): string
     {
