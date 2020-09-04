@@ -18,7 +18,7 @@ use function trim;
 /**
  * @ internal
  */
-final class Builder
+final class Builder implements Block
 {
     /**
      * @var string[]|Block[]
@@ -205,7 +205,13 @@ final class Builder
      */
     public function callback(callable $callback, ...$args): self
     {
-        $callback($this, ...$args);
+        $builder = Markdown::builder();
+
+        $callback($builder, ...$args);
+
+        $this->blocks[] = $builder;
+        $this->blocks[] = PHP_EOL;
+        $this->blocks[] = PHP_EOL;
 
         return $this;
     }

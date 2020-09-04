@@ -16,7 +16,11 @@ class BuilderTest extends TestCase
 {
     public function testP(): void
     {
-        static::assertSame('foo bar', Markdown::builder()->p('foo bar')->getMarkdown());
+        $markdown = <<<'MARKDOWN'
+            foo bar
+            MARKDOWN;
+
+        static::assertSame($markdown, Markdown::builder()->p('foo bar')->getMarkdown());
     }
 
     public function testH1(): void
