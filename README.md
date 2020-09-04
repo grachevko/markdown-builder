@@ -175,6 +175,21 @@ $var = "test";
 ```
 ````
 
+#### Badge
+
+```php
+Markdown::builder()
+    ->badge(
+        'Latest Stable Version',
+        'https://poser.pugx.org/premier/markdown-builder/v',
+        '//packagist.org/packages/premier/markdown-builder',
+    )->getMarkdown();
+```
+
+```markdown
+[![Latest Stable Version](https://poser.pugx.org/premier/markdown-builder/v)](//packagist.org/packages/premier/markdown-builder)
+```
+
 #### Bulleted list
 
 ```php
@@ -366,6 +381,20 @@ Markdown::img('cat.jpg', 'Cat');
 
 ```markdown
 ![Cat](cat.jpg)
+```
+
+#### Badge
+
+```php
+Markdown::badge(
+    'Latest Stable Version',
+    'https://poser.pugx.org/premier/markdown-builder/v',
+    '//packagist.org/packages/premier/markdown-builder',
+    );
+```
+
+```markdown
+[![Latest Stable Version](https://poser.pugx.org/premier/markdown-builder/v)](//packagist.org/packages/premier/markdown-builder)
 ```
 
 #### Numbered list
