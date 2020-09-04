@@ -1,0 +1,9 @@
+Markdown::builder()
+    ->checklist(static function (ChecklistBuilder $builder): void {
+        $builder
+            ->addLine('C', false)
+            ->addLine('D', false)
+            ->addLine('B', true)
+            ->addLine('A', true)
+            ->sort(fn (array $left, array $right) => $left[0] <=> $right[0]);
+    })->getMarkdown();

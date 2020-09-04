@@ -171,6 +171,25 @@ class BuilderTest extends TestCase
         static::assertSame($markdown, $builder->getMarkdown());
     }
 
+    public function testBulletedCallableListSort(): void
+    {
+        $markdown = <<<'MARKDOWN'
+            * A
+            * B
+            * C
+            MARKDOWN;
+
+        $builder = Markdown::builder()->bulletedList(static function (BulletedListBuilder $builder): void {
+            $builder->addLine(
+                'B',
+                'C',
+                'A',
+            )->sort(fn (string $left, string $right) => $left <=> $right);
+        });
+
+        static::assertSame($markdown, $builder->getMarkdown());
+    }
+
     public function testBulletedListMultiline(): void
     {
         $markdown = <<<'MARKDOWN'
@@ -220,6 +239,25 @@ class BuilderTest extends TestCase
                 'foo',
                 'bar',
             );
+        });
+
+        static::assertSame($markdown, $builder->getMarkdown());
+    }
+
+    public function testNumberedCallableListSort(): void
+    {
+        $markdown = <<<'MARKDOWN'
+            1. A
+            2. B
+            3. C
+            MARKDOWN;
+
+        $builder = Markdown::builder()->numberedList(static function (NumberedListBuilder $builder): void {
+            $builder->addLine(
+                'C',
+                'B',
+                'A',
+            )->sort(fn (string $left, string $right) => $left <=> $right);
         });
 
         static::assertSame($markdown, $builder->getMarkdown());
@@ -315,6 +353,25 @@ class BuilderTest extends TestCase
                 ->addLine('Hallo', false)
                 ->addLine('foo', false)
                 ->addLine('bar', true);
+        });
+
+        static::assertSame($markdown, $builder->getMarkdown());
+    }
+
+    public function testChecklistCallableSort(): void
+    {
+        $markdown = <<<'MARKDOWN'
+            - [ ] A
+            - [ ] B
+            - [X] C
+            MARKDOWN;
+
+        $builder = Markdown::builder()->checklist(static function (ChecklistBuilder $builder): void {
+            $builder
+                ->addLine('B', false)
+                ->addLine('C', true)
+                ->addLine('A', false)
+                ->sort(fn (array $left, array $right) => $left[0] <=> $right[0]);
         });
 
         static::assertSame($markdown, $builder->getMarkdown());
@@ -424,6 +481,31 @@ class BuilderTest extends TestCase
                         ['Content from cell 1', 'Content from cell 2'],
                         ['Content in the first column', 'Content in the second column'],
                     );
+                },
+            );
+
+        static::assertSame($markdown, $builder->getMarkdown());
+    }
+
+    public function testTableCallableSort(): void
+    {
+        $markdown = <<<'MARKDOWN'
+            First Header | Second Header
+            ------------ | -------------
+            A | Content from cell A
+            B | Content from cell B
+            C | Content from cell C
+            MARKDOWN;
+
+        $builder = Markdown::builder()
+            ->table(
+                ['First Header', 'Second Header'],
+                static function (TableBuilder $builder): void {
+                    $builder->addRow(
+                        ['C', 'Content from cell C'],
+                        ['A', 'Content from cell A'],
+                        ['B', 'Content from cell B'],
+                    )->sort(fn (array $left, array $right) => $left[0] <=> $right[0]);
                 },
             );
 

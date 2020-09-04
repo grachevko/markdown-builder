@@ -31,7 +31,8 @@ Markdown::builder()
         'write tests' => true,
         Markdown::numberedList(['TableBuilder', 'ListBuilders', 'Checklist']) => true,
         'add more markdown features' => false,
-        'Configure CI' => false,
+        'Configure CI' => true,
+        'CI readme check' => false,
     ])
     ->getMarkdown();
 ```
@@ -57,7 +58,8 @@ Todos
       2. ListBuilders
       3. Checklist
 - [ ] add more markdown features
-- [ ] Configure CI
+- [X] Configure CI
+- [ ] CI readme check
 ````
 
 API
@@ -221,6 +223,27 @@ Markdown::builder()
 * bar
 ```
 
+#### Bulleted list callable sort
+
+```php
+Markdown::builder()
+    ->bulletedList(static function (BulletedListBuilder $builder): void {
+        $builder->addLine(
+            'C',
+            'A',
+            'B',
+            'D',
+        )->sort(fn (string $left, string $right) => $left <=> $right);
+    })->getMarkdown();
+```
+
+```markdown
+* A
+* B
+* C
+* D
+```
+
 #### Numbered list
 
 ```php
@@ -231,6 +254,23 @@ Markdown::builder()->numberedList(['Foo', 'Bar', 'Baz'])->getMarkdown();
 1. Foo
 2. Bar
 3. Baz
+```
+
+#### Checklist
+
+```php
+Markdown::builder()
+    ->checklist([
+        'Hallo' => false,
+        'foo' => false,
+        'bar' => true,
+    ])->getMarkdown();
+```
+
+```markdown
+- [ ] Hallo
+- [ ] foo
+- [X] bar
 ```
 
 #### Numbered list callable
@@ -252,21 +292,25 @@ Markdown::builder()
 3. bar
 ```
 
-#### Checklist
+#### Numbered list callable sort
 
 ```php
 Markdown::builder()
-    ->checklist([
-        'Hallo' => false,
-        'foo' => false,
-        'bar' => true,
-    ])->getMarkdown();
+    ->numberedList(static function (NumberedListBuilder $builder) {
+        $builder->addLine(
+            'A',
+            'D',
+            'B',
+            'C',
+        )->sort(fn (string $left, string $right) => $left <=> $right);
+    })->getMarkdown();
 ```
 
 ```markdown
-- [ ] Hallo
-- [ ] foo
-- [X] bar
+1. A
+2. B
+3. C
+4. D
 ```
 
 #### Checklist callable
@@ -285,6 +329,27 @@ Markdown::builder()
 - [ ] Hallo
 - [ ] foo
 - [X] bar
+```
+
+#### Checklist callable sort
+
+```php
+Markdown::builder()
+    ->checklist(static function (ChecklistBuilder $builder): void {
+        $builder
+            ->addLine('C', false)
+            ->addLine('D', false)
+            ->addLine('B', true)
+            ->addLine('A', true)
+            ->sort(fn (array $left, array $right) => $left[0] <=> $right[0]);
+    })->getMarkdown();
+```
+
+```markdown
+- [X] A
+- [X] B
+- [ ] C
+- [ ] D
 ```
 
 #### Table
@@ -308,7 +373,7 @@ Content from cell 1 | Content from cell 2
 Content in the first column | Content in the second column
 ```
 
-#### Table callable values
+#### Table callable
 
 ```php
 $builder = Markdown::builder()
@@ -329,6 +394,31 @@ First Header | Second Header
 ------------ | -------------
 Content from cell 1 | Content from cell 2
 Content in the first column | Content in the second column
+```
+
+#### Table callable sort
+
+```php
+$builder = Markdown::builder()
+    ->table(
+        ['First Header', 'Second Header'],
+        static function (TableBuilder $builder): void {
+            $builder->addRow(
+                ['C', 'Content from cell C'],
+                ['A', 'Content from cell A'],
+                ['B', 'Content from cell B'],
+            )->sort(fn (array $left, array $right) => $left[0] <=> $right[0]);
+        },
+    )
+    ->getMarkdown();
+```
+
+```markdown
+First Header | Second Header
+------------ | -------------
+A | Content from cell A
+B | Content from cell B
+C | Content from cell C
 ```
 
 ### Inline Blocks

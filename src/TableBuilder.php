@@ -9,6 +9,7 @@ use function implode;
 use function mb_strlen;
 use const PHP_EOL;
 use function str_repeat;
+use function usort;
 
 final class TableBuilder implements Block
 {
@@ -41,6 +42,16 @@ final class TableBuilder implements Block
     public function addRow(array ...$row): self
     {
         $this->rows = [...$this->rows, ...$row];
+
+        return $this;
+    }
+
+    /**
+     * @param callable(array<int, string>, array<int, string>): int $callback
+     */
+    public function sort(callable $callback): self
+    {
+        usort($this->rows, $callback);
 
         return $this;
     }

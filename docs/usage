@@ -8,6 +8,7 @@ Markdown::builder()
         'write tests' => true,
         Markdown::numberedList(['TableBuilder', 'ListBuilders', 'Checklist']) => true,
         'add more markdown features' => false,
-        'Configure CI' => false,
+        'Configure CI' => true,
+        'CI readme check' => false,
     ])
     ->getMarkdown();

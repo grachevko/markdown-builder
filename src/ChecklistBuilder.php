@@ -6,6 +6,7 @@ namespace Premier\MarkdownBuilder;
 
 use function explode;
 use const PHP_EOL;
+use function usort;
 
 final class ChecklistBuilder implements Block
 {
@@ -22,6 +23,16 @@ final class ChecklistBuilder implements Block
     public function addLine(string $line, bool $checked): self
     {
         $this->lines[] = [$line, $checked];
+
+        return $this;
+    }
+
+    /**
+     * @param callable(array{string, bool}, array{string, bool}): int $callback
+     */
+    public function sort(callable $callback): self
+    {
+        usort($this->lines, $callback);
 
         return $this;
     }

@@ -6,6 +6,7 @@ namespace Premier\MarkdownBuilder;
 
 use function explode;
 use const PHP_EOL;
+use function usort;
 
 final class BulletedListBuilder implements Block
 {
@@ -22,6 +23,16 @@ final class BulletedListBuilder implements Block
     public function addLine(string ...$line): self
     {
         $this->lines = [...$this->lines, ...$line];
+
+        return $this;
+    }
+
+    /**
+     * @param callable(string, string): int $callback
+     */
+    public function sort(callable $callback): self
+    {
+        usort($this->lines, $callback);
 
         return $this;
     }
