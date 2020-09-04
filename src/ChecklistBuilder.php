@@ -10,7 +10,7 @@ use const PHP_EOL;
 final class ChecklistBuilder implements Block
 {
     /**
-     * @var array<int, array<bool, string>>
+     * @var array<int, array{string, bool}>
      */
     private array $lines = [];
 
@@ -30,8 +30,7 @@ final class ChecklistBuilder implements Block
     {
         $markdown = '';
 
-        $lines = $this->lines;
-        foreach ($lines as [$element, $checked]) {
+        foreach ($this->lines as [$element, $checked]) {
             $lines = explode(PHP_EOL, $element);
 
             foreach ($lines as $i => $line) {
