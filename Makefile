@@ -1,7 +1,10 @@
-all: php-cs-fixer phpstan phpunit readme
+all: composer-normalize php-cs-fixer phpstan phpunit readme
 
 readme:
 	php bin/readme.php
+
+composer-normalize:
+	composer normalize --dry-run
 
 php-cs-fixer:
 	vendor/bin/php-cs-fixer fix $(if $(DRY),--dry-run) $(if $(DEBUG),-vvv)

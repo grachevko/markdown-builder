@@ -29,6 +29,9 @@ jobs:
                 if: steps.composer-cache.outputs.cache-hit != 'true'
                 run: composer install --prefer-dist --no-progress --no-suggest
 
+            -   name: composer normalize
+                run: composer normalize --dry-run
+
             -   name: php-cs-fixer
                 run: vendor/bin/php-cs-fixer fix --dry-run --diff-format udiff --using-cache=no
 
