@@ -256,23 +256,6 @@ Markdown::builder()->numberedList(['Foo', 'Bar', 'Baz'])->getMarkdown();
 3. Baz
 ```
 
-#### Checklist
-
-```php
-Markdown::builder()
-    ->checklist([
-        'Hallo' => false,
-        'foo' => false,
-        'bar' => true,
-    ])->getMarkdown();
-```
-
-```markdown
-- [ ] Hallo
-- [ ] foo
-- [X] bar
-```
-
 #### Numbered list callable
 
 ```php
@@ -311,6 +294,23 @@ Markdown::builder()
 2. B
 3. C
 4. D
+```
+
+#### Checklist
+
+```php
+Markdown::builder()
+    ->checklist([
+        'Hallo' => false,
+        'foo' => false,
+        'bar' => true,
+    ])->getMarkdown();
+```
+
+```markdown
+- [ ] Hallo
+- [ ] foo
+- [X] bar
 ```
 
 #### Checklist callable
