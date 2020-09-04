@@ -235,4 +235,13 @@ final class Builder
 
         return $this;
     }
+
+    public function badge(string $title, string $img, string $url): self
+    {
+        $this->blocks[] = Markdown::link($url, Markdown::img($img, $title));
+
+        $this->blocks[] = PHP_EOL;
+
+        return $this;
+    }
 }
