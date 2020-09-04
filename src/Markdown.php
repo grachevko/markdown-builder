@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Premier\MarkdownBuilder;
 
+use function explode;
+use function implode;
 use const PHP_EOL;
 use function preg_replace;
 use function sprintf;
@@ -87,5 +89,10 @@ final class Markdown
     public static function badge(string $title, string $img, string $url): string
     {
         return self::builder()->badge($title, $img, $url)->getMarkdown();
+    }
+
+    public static function listAsHtml(string $list): string
+    {
+        return '<ul><li>'.implode('</li><li>', explode(PHP_EOL, $list)).'</li></ul>';
     }
 }

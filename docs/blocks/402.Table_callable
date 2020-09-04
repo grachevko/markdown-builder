@@ -1,4 +1,4 @@
-$builder = Markdown::builder()
+Markdown::builder()
     ->table(
         ['First Header', 'Second Header'],
         static function (TableBuilder $builder): void {
@@ -6,5 +6,4 @@ $builder = Markdown::builder()
                 ->addRow('Content from cell 1', 'Content from cell 2')
                 ->addRow('Content in the first column', 'Content in the second column');
         },
-    )
-    ->getMarkdown();
+    )->getMarkdown();

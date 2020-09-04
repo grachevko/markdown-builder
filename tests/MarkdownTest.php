@@ -39,4 +39,9 @@ final class MarkdownTest extends TestCase
     {
         static::assertSame('A B C', Markdown::inline('A '.PHP_EOL.'B '.PHP_EOL.'C '));
     }
+
+    public function testListAsHtml(): void
+    {
+        static::assertSame('<ul><li>A </li><li>B </li><li>C </li></ul>', Markdown::listAsHtml('A '.PHP_EOL.'B '.PHP_EOL.'C '));
+    }
 }

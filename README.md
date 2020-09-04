@@ -361,8 +361,7 @@ Markdown::builder()
             ['Content from cell 1', 'Content from cell 2'],
             ['Content in the first column', 'Content in the second column'],
         ]
-    )
-    ->getMarkdown();
+    )->getMarkdown();
 ```
 
 ```markdown
@@ -375,7 +374,7 @@ Content in the first column | Content in the second column
 #### Table callable
 
 ```php
-$builder = Markdown::builder()
+Markdown::builder()
     ->table(
         ['First Header', 'Second Header'],
         static function (TableBuilder $builder): void {
@@ -383,8 +382,7 @@ $builder = Markdown::builder()
                 ->addRow('Content from cell 1', 'Content from cell 2')
                 ->addRow('Content in the first column', 'Content in the second column');
         },
-    )
-    ->getMarkdown();
+    )->getMarkdown();
 ```
 
 ```markdown
@@ -397,7 +395,7 @@ Content in the first column | Content in the second column
 #### Table callable sort
 
 ```php
-$builder = Markdown::builder()
+Markdown::builder()
     ->table(
         ['First Header', 'Second Header'],
         static function (TableBuilder $builder): void {
@@ -407,8 +405,7 @@ $builder = Markdown::builder()
                 ->addRow('B', 'Content from cell B')
                 ->sort(fn (array $left, array $right) => $left[0] <=> $right[0]);
         },
-    )
-    ->getMarkdown();
+    )->getMarkdown();
 ```
 
 ```markdown
@@ -417,6 +414,35 @@ First Header | Second Header
 A | Content from cell A
 B | Content from cell B
 C | Content from cell C
+```
+
+#### Table with nested list
+
+```php
+Markdown::builder()
+    ->table(
+        ['First Header', 'Second Header'],
+        static function (TableBuilder $builder): void {
+            $builder
+                ->addRow('A', Markdown::listAsHtml(Markdown::checklist([
+                    [true, 'A'],
+                    [false, 'B'],
+                    [false, 'C'],
+                ])))
+                ->addRow('B', Markdown::listAsHtml(Markdown::checklist([
+                    [true, 'D'],
+                    [false, 'E'],
+                    [false, 'F'],
+                ])));
+        },
+    )->getMarkdown();
+```
+
+```markdown
+First Header | Second Header
+------------ | -------------
+A | <ul><li>- [X] A</li><li>- [ ] B</li><li>- [ ] C</li></ul>
+B | <ul><li>- [X] D</li><li>- [ ] E</li><li>- [ ] F</li></ul>
 ```
 
 ### Inline Blocks

@@ -1,0 +1,17 @@
+Markdown::builder()
+    ->table(
+        ['First Header', 'Second Header'],
+        static function (TableBuilder $builder): void {
+            $builder
+                ->addRow('A', Markdown::listAsHtml(Markdown::checklist([
+                    [true, 'A'],
+                    [false, 'B'],
+                    [false, 'C'],
+                ])))
+                ->addRow('B', Markdown::listAsHtml(Markdown::checklist([
+                    [true, 'D'],
+                    [false, 'E'],
+                    [false, 'F'],
+                ])));
+        },
+    )->getMarkdown();

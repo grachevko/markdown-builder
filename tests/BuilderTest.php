@@ -508,4 +508,34 @@ class BuilderTest extends TestCase
 
         static::assertSame($markdown, $builder->getMarkdown());
     }
+
+    public function testTableWithNestedChecklist(): void
+    {
+        $markdown = <<<'MARKDOWN'
+            First Header | Second Header
+            ------------ | -------------
+            A | <ul><li>- [X] A</li><li>- [ ] B</li><li>- [ ] C</li></ul>
+            B | <ul><li>- [X] D</li><li>- [ ] E</li><li>- [ ] F</li></ul>
+            MARKDOWN;
+
+        $builder = Markdown::builder()
+            ->table(
+                ['First Header', 'Second Header'],
+                static function (TableBuilder $builder): void {
+                    $builder
+                        ->addRow('A', Markdown::listAsHtml(Markdown::checklist([
+                            [true, 'A'],
+                            [false, 'B'],
+                            [false, 'C'],
+                        ])))
+                        ->addRow('B', Markdown::listAsHtml(Markdown::checklist([
+                            [true, 'D'],
+                            [false, 'E'],
+                            [false, 'F'],
+                        ])));
+                },
+            );
+
+        static::assertSame($markdown, $builder->getMarkdown());
+    }
 }

@@ -1,4 +1,4 @@
-$builder = Markdown::builder()
+Markdown::builder()
     ->table(
         ['First Header', 'Second Header'],
         static function (TableBuilder $builder): void {
@@ -8,5 +8,4 @@ $builder = Markdown::builder()
                 ->addRow('B', 'Content from cell B')
                 ->sort(fn (array $left, array $right) => $left[0] <=> $right[0]);
         },
-    )
-    ->getMarkdown();
+    )->getMarkdown();
