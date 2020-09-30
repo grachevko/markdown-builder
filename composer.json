@@ -23,7 +23,8 @@
         "phpstan/phpstan": "^0.12.37",
         "phpstan/phpstan-phpunit": "^0.12.16",
         "phpstan/phpstan-strict-rules": "^0.12.4",
-        "phpunit/phpunit": "^9.3"
+        "phpunit/phpunit": "^9.3",
+        "vimeo/psalm": "^3.16"
     },
     "autoload": {
         "psr-4": {

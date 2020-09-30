@@ -38,7 +38,7 @@ final class ChecklistBuilder implements BlockInterface
     }
 
     /**
-     * @param callable(array{string, bool}, array{string, bool}): int $callback
+     * @param callable(array{bool, string}, array{bool, string}): int $callback
      */
     public function sort(callable $callback): self
     {

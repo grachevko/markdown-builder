@@ -1,4 +1,4 @@
-all: composer-normalize php-cs-fixer phpstan phpunit readme
+all: composer-normalize php-cs-fixer phpstan psalm phpunit readme
 
 readme:
 	php bin/readme.php
@@ -11,6 +11,9 @@ php-cs-fixer:
 
 phpstan:
 	vendor/bin/phpstan analyse --no-interaction --memory-limit=-1 --configuration=phpstan.neon
+
+psalm:
+	vendor/bin/psalm
 
 phpunit:
 	vendor/bin/phpunit

@@ -191,8 +191,8 @@ final class Builder implements BlockInterface
     }
 
     /**
-     * @param array<int, string>         $headers
-     * @param array<int, array>|callable $values
+     * @param array<int, string>                      $headers
+     * @param array<int, array<int, string>>|callable $values
      */
     public function table(array $headers, $values): self
     {
