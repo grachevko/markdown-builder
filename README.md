@@ -67,8 +67,8 @@ API
 ===
 
 The markdown builder have two kinds of elements, block and inline elements.
-        Block elements will be buffered and you can get the markdown if you call the method `getMarkdown()`.
-        All inline Elements get instantly the markdown output.
+Block elements will be buffered and you can get the markdown if you call the method `getMarkdown()`.
+All inline Elements get instantly the markdown output.
 
 ### Block Elements
 
@@ -151,9 +151,9 @@ Markdown::builder()->blockquote("Foo\nBar\nBaz");
 ```
 
 ```markdown
->  Foo
->  Bar
->  Baz
+> Foo
+> Bar
+> Baz
 ```
 
 #### hr
@@ -560,14 +560,14 @@ Markdown::builder()
 ```
 
 ```markdown
->  Lists
->  =====
+> Lists
+> =====
 >
->  * Foo
->  * 1. A
->    2. B
->    3. C
->  * Bar
+> * Foo
+> * 1. A
+>   2. B
+>   3. C
+> * Bar
 ```
 
 #### Callback

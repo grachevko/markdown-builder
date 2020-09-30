@@ -2,26 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Premier\MarkdownBuilder;
+namespace Premier\MarkdownBuilder\Block;
 
-use function array_map;
-use function explode;
 use function file_put_contents;
 use function implode;
 use function is_callable;
-use function mb_strlen;
 use const PHP_EOL;
-use function str_repeat;
-use function strpos;
-use function trim;
+use Premier\MarkdownBuilder\BlockInterface;
+use Premier\MarkdownBuilder\Markdown;
 
 /**
  * @ internal
  */
-final class Builder implements Block
+final class Builder implements BlockInterface
 {
     /**
-     * @var string[]|Block[]
+     * @var BlockInterface[]
      */
     private array $blocks = [];
 
@@ -32,83 +28,58 @@ final class Builder implements Block
 
     public function p(string $text): self
     {
-        $this->blocks[] = trim($text).PHP_EOL;
-
-        $this->blocks[] = PHP_EOL;
+        $this->blocks[] = new Block($text);
 
         return $this;
     }
 
     public function h1(string $header): self
     {
-        $header = Markdown::inline($header);
-
-        $this->blocks[] = $header.PHP_EOL;
-        $this->blocks[] = str_repeat('=', mb_strlen($header)).PHP_EOL;
-
-        $this->blocks[] = PHP_EOL;
+        $this->blocks[] = new H1($header);
 
         return $this;
     }
 
     public function h2(string $header): self
     {
-        $header = Markdown::inline($header);
-
-        $this->blocks[] = $header.PHP_EOL;
-        $this->blocks[] = str_repeat('-', mb_strlen($header)).PHP_EOL;
-
-        $this->blocks[] = PHP_EOL;
+        $this->blocks[] = new H2($header);
 
         return $this;
     }
 
     public function h3(string $header): self
     {
-        $this->blocks[] = '### '.Markdown::inline($header).PHP_EOL;
-
-        $this->blocks[] = PHP_EOL;
+        $this->blocks[] = new H3($header);
 
         return $this;
     }
 
     public function h4(string $header): self
     {
-        $this->blocks[] = '#### '.Markdown::inline($header).PHP_EOL;
-
-        $this->blocks[] = PHP_EOL;
+        $this->blocks[] = new H4($header);
 
         return $this;
     }
 
     public function h5(string $header): self
     {
-        $this->blocks[] = '##### '.Markdown::inline($header).PHP_EOL;
-
-        $this->blocks[] = PHP_EOL;
+        $this->blocks[] = new H5($header);
 
         return $this;
     }
 
     public function h6(string $header): self
     {
-        $this->blocks[] = '###### '.Markdown::inline($header).PHP_EOL;
-
-        $this->blocks[] = PHP_EOL;
+        $this->blocks[] = new H6($header);
 
         return $this;
     }
 
     public function blockquote(string $text): self
     {
-        $lines = explode(PHP_EOL, $text);
-        $newLines = array_map(static function ($line): string {
-            return trim('>  '.$line);
-        }, $lines);
+        $this->blocks[] = new Blockquote($text);
 
-        $content = implode(PHP_EOL, $newLines);
-
-        return $this->p($content);
+        return $this;
     }
 
     /**
@@ -161,35 +132,48 @@ final class Builder implements Block
 
     public function hr(): self
     {
-        return $this->p('---------------------------------------');
+        $this->blocks[] = new HR();
+
+        return $this;
     }
 
     public function code(string $code, string $lang = ''): self
     {
-        $backticks = '```';
-        if (false !== strpos($code, '```')) {
-            $backticks .= '`';
-        }
-
-        $this->blocks[] = $backticks.$lang.PHP_EOL;
-        $this->blocks[] = $code.PHP_EOL;
-        $this->blocks[] = $backticks.PHP_EOL;
-
-        $this->blocks[] = PHP_EOL;
+        $this->blocks[] = new Code($code, $lang);
 
         return $this;
     }
 
     public function br(): self
     {
-        $this->blocks[] = PHP_EOL;
+        $this->blocks[] = new BR();
 
         return $this;
     }
 
-    public function getMarkdown(): string
+    public function getMarkdown(bool $inline = false): string
     {
-        return trim(implode('', $this->blocks));
+        $glue = PHP_EOL.PHP_EOL;
+
+        if ($inline) {
+            $glue = PHP_EOL;
+        }
+
+        return implode($glue, $this->blocks);
+    }
+
+    /**
+     * @param mixed $args
+     */
+    public function inline(callable $callback, ...$args): self
+    {
+        $builder = Markdown::builder();
+
+        $callback($builder, ...$args);
+
+        $this->blocks[] = new InlineBuilder($builder);
+
+        return $this;
     }
 
     /**
@@ -202,8 +186,6 @@ final class Builder implements Block
         $callback($builder, ...$args);
 
         $this->blocks[] = $builder;
-        $this->blocks[] = PHP_EOL;
-        $this->blocks[] = PHP_EOL;
 
         return $this;
     }
@@ -236,9 +218,7 @@ final class Builder implements Block
 
     public function badge(string $title, string $img, string $url): self
     {
-        $this->blocks[] = Markdown::link($url, Markdown::img($img, $title));
-
-        $this->blocks[] = PHP_EOL;
+        $this->blocks[] = new Block(Markdown::link($url, Markdown::img($img, $title)));
 
         return $this;
     }

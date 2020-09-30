@@ -2,21 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Premier\MarkdownBuilder;
+namespace Premier\MarkdownBuilder\Block;
 
+use function array_key_last;
 use function explode;
 use const PHP_EOL;
+use Premier\MarkdownBuilder\BlockInterface;
 use function usort;
 
-final class ChecklistBuilder implements Block
+final class BulletedListBuilder implements BlockInterface
 {
     /**
-     * @var array<int, array{bool, string}>
+     * @var array<int, string>
      */
     private array $lines;
 
     /**
-     * @param array<int, array{bool, string}> $lines
+     * @param array<int, string> $lines
      */
     public function __construct(array $lines = [])
     {
@@ -28,15 +30,15 @@ final class ChecklistBuilder implements Block
         return $this->getMarkdown();
     }
 
-    public function addLine(bool $checked, string $line): self
+    public function addLine(string $line): self
     {
-        $this->lines[] = [$checked, $line];
+        $this->lines[] = $line;
 
         return $this;
     }
 
     /**
-     * @param callable(array{string, bool}, array{string, bool}): int $callback
+     * @param callable(string, string): int $callback
      */
     public function sort(callable $callback): self
     {
@@ -49,19 +51,25 @@ final class ChecklistBuilder implements Block
     {
         $markdown = '';
 
-        foreach ($this->lines as [$checked, $element]) {
+        foreach ($this->lines as $key => $element) {
             $lines = explode(PHP_EOL, $element);
 
             foreach ($lines as $i => $line) {
                 if (0 === $i) {
-                    $markdown .= '- ['.($checked ? 'X' : ' ').'] '.$line.PHP_EOL;
+                    $markdown .= '* '.$line;
                 } else {
-                    $markdown .= '      '.$line.PHP_EOL;
+                    $markdown .= '  '.$line;
+                }
+
+                if (array_key_last($lines) !== $i) {
+                    $markdown .= PHP_EOL;
                 }
             }
-        }
 
-        $markdown .= PHP_EOL;
+            if (array_key_last($this->lines) !== $key) {
+                $markdown .= PHP_EOL;
+            }
+        }
 
         return $markdown;
     }
