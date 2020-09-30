@@ -2,13 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Premier\MarkdownBuilder;
+namespace Premier\MarkdownBuilder\Block;
 
+use function array_key_last;
+use function array_values;
 use function explode;
 use const PHP_EOL;
+use Premier\MarkdownBuilder\BlockInterface;
 use function usort;
 
-final class BulletedListBuilder implements Block
+final class NumberedListBuilder implements BlockInterface
 {
     /**
      * @var array<int, string>
@@ -49,20 +52,25 @@ final class BulletedListBuilder implements Block
     {
         $markdown = '';
 
-        $lines = $this->lines;
-        foreach ($lines as $element) {
+        foreach (array_values($this->lines) as $key => $element) {
             $lines = explode(PHP_EOL, $element);
 
             foreach ($lines as $i => $line) {
                 if (0 === $i) {
-                    $markdown .= '* '.$line.PHP_EOL;
+                    $markdown .= ($key + 1).'. '.$line;
                 } else {
-                    $markdown .= '  '.$line.PHP_EOL;
+                    $markdown .= '   '.$line;
+                }
+
+                if (array_key_last($lines) !== $i) {
+                    $markdown .= PHP_EOL;
                 }
             }
-        }
 
-        $markdown .= PHP_EOL;
+            if (array_key_last($this->lines) !== $key) {
+                $markdown .= PHP_EOL;
+            }
+        }
 
         return $markdown;
     }

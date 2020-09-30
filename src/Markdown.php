@@ -8,6 +8,7 @@ use function explode;
 use function implode;
 use const PHP_EOL;
 use function preg_replace;
+use Premier\MarkdownBuilder\Block\Builder;
 use function sprintf;
 use function str_replace;
 use function trim;

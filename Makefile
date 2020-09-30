@@ -13,4 +13,4 @@ phpstan:
 	vendor/bin/phpstan analyse --no-interaction --memory-limit=-1 --configuration=phpstan.neon
 
 phpunit:
-	vendor/bin/phpunit --stop-on-failure
+	vendor/bin/phpunit

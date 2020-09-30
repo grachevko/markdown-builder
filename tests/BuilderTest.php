@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Premier\MarkdownBuilder\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Premier\MarkdownBuilder\Builder;
-use Premier\MarkdownBuilder\BulletedListBuilder;
-use Premier\MarkdownBuilder\ChecklistBuilder;
+use Premier\MarkdownBuilder\Block\Builder;
+use Premier\MarkdownBuilder\Block\BulletedListBuilder;
+use Premier\MarkdownBuilder\Block\ChecklistBuilder;
+use Premier\MarkdownBuilder\Block\NumberedListBuilder;
+use Premier\MarkdownBuilder\Block\TableBuilder;
 use Premier\MarkdownBuilder\Markdown;
-use Premier\MarkdownBuilder\NumberedListBuilder;
-use Premier\MarkdownBuilder\TableBuilder;
 
 class BuilderTest extends TestCase
 {
@@ -99,8 +99,8 @@ class BuilderTest extends TestCase
     public function testBlockquote(): void
     {
         $markdown = <<<'MARKDOWN'
-            >  foo bar
-            >     hey ho
+            > foo bar
+            >    hey ho
             MARKDOWN;
 
         $builder = Markdown::builder()->blockquote("foo bar\n   hey ho");
@@ -111,16 +111,16 @@ class BuilderTest extends TestCase
     public function testBlockquoteComplex(): void
     {
         $expected = <<<'MARKDOWN'
-            >  test
-            >  ====
+            > test
+            > ====
             >
-            >  * A
-            >  * B
-            >  * C
+            > * A
+            > * B
+            > * C
             >
-            >  >  test123
+            > > test123
             >
-            >  foo bar
+            > foo bar
             MARKDOWN;
 
         $builder = Markdown::builder()->blockquote(

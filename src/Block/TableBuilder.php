@@ -2,16 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Premier\MarkdownBuilder;
+namespace Premier\MarkdownBuilder\Block;
 
+use function array_key_last;
 use function array_map;
 use function implode;
 use function mb_strlen;
 use const PHP_EOL;
+use Premier\MarkdownBuilder\BlockInterface;
 use function str_repeat;
 use function usort;
 
-final class TableBuilder implements Block
+final class TableBuilder implements BlockInterface
 {
     /**
      * @var array<int, string>
@@ -67,11 +69,13 @@ final class TableBuilder implements Block
         $markdown .= implode(' | ', $headers).PHP_EOL;
         $markdown .= implode(' | ', $separator).PHP_EOL;
 
-        foreach ($this->rows as $row) {
-            $markdown .= implode(' | ', $row).PHP_EOL;
-        }
+        foreach ($this->rows as $key => $row) {
+            $markdown .= implode(' | ', $row);
 
-        $markdown .= PHP_EOL;
+            if (array_key_last($this->rows) !== $key) {
+                $markdown .= PHP_EOL;
+            }
+        }
 
         return $markdown;
     }
