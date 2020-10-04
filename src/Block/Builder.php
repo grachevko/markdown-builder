@@ -87,13 +87,15 @@ final class Builder implements BlockInterface
      */
     public function bulletedList($list): self
     {
-        if (is_callable($list)) {
-            $list($this->blocks[] = new BulletedListBuilder());
+        [$list, $callback] = is_callable($list) ? [[], $list] : [$list, null];
 
-            return $this;
+        $listBuilder = new BulletedListBuilder($list);
+
+        if (is_callable($callback)) {
+            $callback($listBuilder);
         }
 
-        $this->blocks[] = new BulletedListBuilder($list);
+        $this->blocks[] = $listBuilder;
 
         return $this;
     }
@@ -103,13 +105,15 @@ final class Builder implements BlockInterface
      */
     public function numberedList($list): self
     {
-        if (is_callable($list)) {
-            $list($this->blocks[] = new NumberedListBuilder());
+        [$list, $callback] = is_callable($list) ? [[], $list] : [$list, null];
 
-            return $this;
+        $listBuilder = new NumberedListBuilder($list);
+
+        if (is_callable($callback)) {
+            $callback($listBuilder);
         }
 
-        $this->blocks[] = new NumberedListBuilder($list);
+        $this->blocks[] = $listBuilder;
 
         return $this;
     }
@@ -119,13 +123,15 @@ final class Builder implements BlockInterface
      */
     public function checklist($list): self
     {
-        if (is_callable($list)) {
-            $list($this->blocks[] = new ChecklistBuilder());
+        [$list, $callback] = is_callable($list) ? [[], $list] : [$list, null];
 
-            return $this;
+        $listBuilder = new ChecklistBuilder($list);
+
+        if (is_callable($callback)) {
+            $callback($listBuilder);
         }
 
-        $this->blocks[] = new ChecklistBuilder($list);
+        $this->blocks[] = $listBuilder;
 
         return $this;
     }
@@ -196,15 +202,15 @@ final class Builder implements BlockInterface
      */
     public function table(array $headers, $values): self
     {
-        if (is_callable($values)) {
-            $this->blocks[] = $tableBuilder = new TableBuilder($headers);
+        [$values, $callback] = is_callable($values) ? [[], $values] : [$values, null];
 
-            $values($tableBuilder);
+        $tableBuilder = new TableBuilder($headers, $values);
 
-            return $this;
+        if (is_callable($callback)) {
+            $callback($tableBuilder);
         }
 
-        $this->blocks[] = $tableBuilder = new TableBuilder($headers, $values);
+        $this->blocks[] = $tableBuilder;
 
         return $this;
     }
