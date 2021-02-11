@@ -20,11 +20,12 @@
     "require-dev": {
         "ergebnis/composer-normalize": "^2.8",
         "friendsofphp/php-cs-fixer": "^2.16",
+        "infection/infection": "^0.21.0",
         "phpstan/phpstan": "^0.12.37",
         "phpstan/phpstan-phpunit": "^0.12.16",
         "phpstan/phpstan-strict-rules": "^0.12.4",
         "phpunit/phpunit": "^9.3",
-        "vimeo/psalm": "^3.16"
+        "vimeo/psalm": "^4.5"
     },
     "autoload": {
         "psr-4": {
@@ -38,5 +39,31 @@
         "psr-4": {
             "Premier\\MarkdownBuilder\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "cs": [
+            "vendor/bin/php-cs-fixer fix --using-cache=no"
+        ],
+        "cs-check": [
+            "vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
+        ],
+        "norm": "composer normalize --no-check-lock",
+        "norm-check": "composer normalize --diff --dry-run",
+        "phpstan": [
+            "vendor/bin/phpstan analyse"
+        ],
+        "phpunit": [
+            "vendor/bin/phpunit --verbose"
+        ],
+        "psalm": [
+            "vendor/bin/psalm"
+        ],
+        "test": [
+            "@norm",
+            "@cs",
+            "@phpstan",
+            "@psalm",
+            "@phpunit"
+        ]
     }
 }

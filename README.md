@@ -1,8 +1,9 @@
 [![Latest Stable Version](https://poser.pugx.org/premier/markdown-builder/v)](//packagist.org/packages/premier/markdown-builder)
 [![Total Downloads](https://poser.pugx.org/premier/markdown-builder/downloads)](//packagist.org/packages/premier/markdown-builder)
-[![Latest Unstable Version](https://poser.pugx.org/premier/markdown-builder/v/unstable)](//packagist.org/packages/premier/markdown-builder)
 [![Dependents](https://poser.pugx.org/premier/markdown-builder/dependents)](//packagist.org/packages/premier/markdown-builder)
 [![License](https://poser.pugx.org/premier/markdown-builder/license)](//packagist.org/packages/premier/markdown-builder)
+[![codecov](https://codecov.io/gh/grachevko/markdown-builder/branch/main/graph/badge.svg?token=W5FVJRFL6T)](https://codecov.io/gh/grachevko/markdown-builder)
+[![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fgrachevko%2Fmarkdown-builder%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/grachevko/markdown-builder/main)
 
 Markdown Builder
 ================

@@ -4,11 +4,7 @@ declare(strict_types=1);
 
 namespace Premier\MarkdownBuilder\Block;
 
-use function array_key_last;
-use function explode;
-use const PHP_EOL;
 use Premier\MarkdownBuilder\BlockInterface;
-use function usort;
 
 final class BulletedListBuilder implements BlockInterface
 {
@@ -42,7 +38,7 @@ final class BulletedListBuilder implements BlockInterface
      */
     public function sort(callable $callback): self
     {
-        usort($this->lines, $callback);
+        \usort($this->lines, $callback);
 
         return $this;
     }
@@ -52,7 +48,7 @@ final class BulletedListBuilder implements BlockInterface
         $markdown = '';
 
         foreach ($this->lines as $key => $element) {
-            $lines = explode(PHP_EOL, $element);
+            $lines = \explode(PHP_EOL, $element);
 
             foreach ($lines as $i => $line) {
                 if (0 === $i) {
@@ -61,12 +57,12 @@ final class BulletedListBuilder implements BlockInterface
                     $markdown .= '  '.$line;
                 }
 
-                if (array_key_last($lines) !== $i) {
+                if (\array_key_last($lines) !== $i) {
                     $markdown .= PHP_EOL;
                 }
             }
 
-            if (array_key_last($this->lines) !== $key) {
+            if (\array_key_last($this->lines) !== $key) {
                 $markdown .= PHP_EOL;
             }
         }
