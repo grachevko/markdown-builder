@@ -10,7 +10,8 @@ require_once \dirname(__DIR__).'/vendor/autoload.php';
 $codeAndMarkdownCallback = static function (Builder $builder, string $code): void {
     $builder
         ->code(''.\trim($code), 'php')
-        ->code(eval('use Premier\MarkdownBuilder\Markdown; use Premier\MarkdownBuilder\Block\{Builder, TableBuilder, BulletedListBuilder, NumberedListBuilder, ChecklistBuilder}; return (string) '.$code), 'markdown');
+        ->code(eval('use Premier\MarkdownBuilder\Markdown; use Premier\MarkdownBuilder\Block\{Builder, TableBuilder, BulletedListBuilder, NumberedListBuilder, ChecklistBuilder}; return (string) '.$code), 'markdown')
+    ;
 };
 
 $parseFileCallback = static function (Builder $builder, string $file) use ($codeAndMarkdownCallback): void {
@@ -25,7 +26,8 @@ $parseDirCallback = static function (Builder $builder, string $dir) use ($codeAn
 
         $builder
             ->h4(\substr(\str_replace('_', ' ', $file), 4))
-            ->callback($codeAndMarkdownCallback, \file_get_contents($dir.'/'.$file));
+            ->callback($codeAndMarkdownCallback, \file_get_contents($dir.'/'.$file))
+        ;
     }
 };
 
@@ -43,11 +45,6 @@ Markdown::builder()
                 '//packagist.org/packages/premier/markdown-builder',
             )
             ->badge(
-                'Latest Unstable Version',
-                'https://poser.pugx.org/premier/markdown-builder/v/unstable',
-                '//packagist.org/packages/premier/markdown-builder',
-            )
-            ->badge(
                 'Dependents',
                 'https://poser.pugx.org/premier/markdown-builder/dependents',
                 '//packagist.org/packages/premier/markdown-builder',
@@ -56,7 +53,18 @@ Markdown::builder()
                 'License',
                 'https://poser.pugx.org/premier/markdown-builder/license',
                 '//packagist.org/packages/premier/markdown-builder',
-            );
+            )
+            ->badge(
+                'codecov',
+                'https://codecov.io/gh/grachevko/markdown-builder/branch/main/graph/badge.svg?token=W5FVJRFL6T',
+                'https://codecov.io/gh/grachevko/markdown-builder',
+            )
+            ->badge(
+                'Mutation testing badge',
+                'https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fgrachevko%2Fmarkdown-builder%2Fmain',
+                'https://dashboard.stryker-mutator.io/reports/github.com/grachevko/markdown-builder/main',
+            )
+        ;
     })
     ->h1('Markdown Builder')
     ->p('A helper class to create markdown.')
@@ -85,4 +93,5 @@ Markdown::builder()
     ->h4('Dump to File')
     ->p('Instead of returning markdown as a string you can easy dump result to file.')
     ->code('Markdown::builder()->h1(\'Hello world!\')->dump(\'index.md\');', 'php')
-    ->dump(\dirname(__DIR__).'/README.md');
+    ->dump(\dirname(__DIR__).'/README.md')
+;

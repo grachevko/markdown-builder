@@ -20,7 +20,7 @@ class BuilderTest extends TestCase
             foo bar
             MARKDOWN;
 
-        static::assertSame($markdown, Markdown::builder()->p('foo bar')->getMarkdown());
+        self::assertSame($markdown, Markdown::builder()->p('foo bar')->getMarkdown());
     }
 
     public function testH1(): void
@@ -32,7 +32,7 @@ class BuilderTest extends TestCase
 
         $builder = Markdown::builder()->h1('foo bar');
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testH1Multiline(): void
@@ -45,7 +45,7 @@ class BuilderTest extends TestCase
         $builder = Markdown::builder()->h1('foo
         bar');
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testH2(): void
@@ -57,7 +57,7 @@ class BuilderTest extends TestCase
 
         $builder = Markdown::builder()->h2('foo bar');
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testH2Multiline(): void
@@ -70,7 +70,7 @@ class BuilderTest extends TestCase
         $builder = Markdown::builder()->h2('foo
         bar');
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testH3(): void
@@ -81,7 +81,7 @@ class BuilderTest extends TestCase
 
         $builder = Markdown::builder()->h3('foo bar');
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testH3Multiline(): void
@@ -93,7 +93,7 @@ class BuilderTest extends TestCase
         $builder = Markdown::builder()->h3('foo
         bar');
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testBlockquote(): void
@@ -105,7 +105,7 @@ class BuilderTest extends TestCase
 
         $builder = Markdown::builder()->blockquote("foo bar\n   hey ho");
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testBlockquoteComplex(): void
@@ -132,7 +132,7 @@ class BuilderTest extends TestCase
                 ->getMarkdown()
         );
 
-        static::assertSame($expected, $builder->getMarkdown());
+        self::assertSame($expected, $builder->getMarkdown());
     }
 
     public function testBulletedList(): void
@@ -149,7 +149,7 @@ class BuilderTest extends TestCase
             'bar',
         ]);
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testBulletedCallableList(): void
@@ -164,10 +164,11 @@ class BuilderTest extends TestCase
             $builder
                 ->addLine('Hallo')
                 ->addLine('foo')
-                ->addLine('bar');
+                ->addLine('bar')
+            ;
         });
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testBulletedCallableListSort(): void
@@ -183,10 +184,11 @@ class BuilderTest extends TestCase
                 ->addLine('B')
                 ->addLine('C')
                 ->addLine('A')
-                ->sort(fn (string $left, string $right) => $left <=> $right);
+                ->sort(fn (string $left, string $right) => $left <=> $right)
+            ;
         });
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testBulletedListMultiline(): void
@@ -204,7 +206,7 @@ class BuilderTest extends TestCase
             'bar',
         ]);
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testNumberedList(): void
@@ -221,7 +223,7 @@ class BuilderTest extends TestCase
             'bar',
         ]);
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testNumberedCallableList(): void
@@ -236,10 +238,11 @@ class BuilderTest extends TestCase
             $builder
                 ->addLine('Hallo')
                 ->addLine('foo')
-                ->addLine('bar');
+                ->addLine('bar')
+            ;
         });
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testNumberedCallableListSort(): void
@@ -255,10 +258,11 @@ class BuilderTest extends TestCase
                 ->addLine('C')
                 ->addLine('B')
                 ->addLine('A')
-                ->sort(fn (string $left, string $right) => $left <=> $right);
+                ->sort(fn (string $left, string $right) => $left <=> $right)
+            ;
         });
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testNumberedListMultiline(): void
@@ -276,7 +280,7 @@ class BuilderTest extends TestCase
             "foo\ngeheim",
             'bar',
         ]);
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testMultiLists(): void
@@ -299,7 +303,7 @@ class BuilderTest extends TestCase
             'bar',
         ]);
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testChecklist(): void
@@ -316,7 +320,7 @@ class BuilderTest extends TestCase
             [true, 'bar'],
         ]);
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testChecklistMultiline(): void
@@ -335,7 +339,7 @@ class BuilderTest extends TestCase
             [true, 'bar'],
         ]);
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testChecklistCallable(): void
@@ -350,10 +354,11 @@ class BuilderTest extends TestCase
             $builder
                 ->addLine(false, 'Hallo')
                 ->addLine(false, 'foo')
-                ->addLine(true, 'bar');
+                ->addLine(true, 'bar')
+            ;
         });
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testChecklistCallableSort(): void
@@ -369,10 +374,11 @@ class BuilderTest extends TestCase
                 ->addLine(false, 'B')
                 ->addLine(true, 'C')
                 ->addLine(false, 'A')
-                ->sort(fn (array $left, array $right) => $left[1] <=> $right[1]);
+                ->sort(fn (array $left, array $right) => $left[1] <=> $right[1])
+            ;
         });
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testHr(): void
@@ -383,7 +389,7 @@ class BuilderTest extends TestCase
 
         $builder = Markdown::builder()->hr();
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testCode(): void
@@ -396,7 +402,7 @@ class BuilderTest extends TestCase
 
         $builder = Markdown::builder()->code('apt-get install php5', 'bash');
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testListAndHeadline(): void
@@ -414,9 +420,10 @@ class BuilderTest extends TestCase
                 'foo',
                 'bar',
             ])
-            ->h1('test');
+            ->h1('test')
+        ;
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testCallback(): void
@@ -435,10 +442,11 @@ class BuilderTest extends TestCase
                     'foo',
                     'bar',
                 ])
-                ->h1('test');
+                ->h1('test')
+            ;
         });
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testTable(): void
@@ -457,9 +465,10 @@ class BuilderTest extends TestCase
                     ['Content from cell 1', 'Content from cell 2'],
                     ['Content in the first column', 'Content in the second column'],
                 ]
-            );
+            )
+        ;
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testTableCallable(): void
@@ -477,11 +486,13 @@ class BuilderTest extends TestCase
                 static function (TableBuilder $builder): void {
                     $builder
                         ->addRow('Content from cell 1', 'Content from cell 2')
-                        ->addRow('Content in the first column', 'Content in the second column');
+                        ->addRow('Content in the first column', 'Content in the second column')
+                    ;
                 },
-            );
+            )
+        ;
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testTableCallableSort(): void
@@ -502,11 +513,13 @@ class BuilderTest extends TestCase
                         ->addRow('C', 'Content from cell C')
                         ->addRow('A', 'Content from cell A')
                         ->addRow('B', 'Content from cell B')
-                        ->sort(fn (array $left, array $right) => $left[0] <=> $right[0]);
+                        ->sort(fn (array $left, array $right) => $left[0] <=> $right[0])
+                    ;
                 },
-            );
+            )
+        ;
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 
     public function testTableWithNestedChecklist(): void
@@ -532,10 +545,12 @@ class BuilderTest extends TestCase
                             [true, 'D'],
                             [false, 'E'],
                             [false, 'F'],
-                        ])));
+                        ])))
+                    ;
                 },
-            );
+            )
+        ;
 
-        static::assertSame($markdown, $builder->getMarkdown());
+        self::assertSame($markdown, $builder->getMarkdown());
     }
 }

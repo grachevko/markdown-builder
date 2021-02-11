@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Premier\MarkdownBuilder\Block;
 
-use function file_put_contents;
-use function implode;
-use function is_callable;
-use const PHP_EOL;
 use Premier\MarkdownBuilder\BlockInterface;
 use Premier\MarkdownBuilder\Markdown;
 
@@ -87,7 +83,7 @@ final class Builder implements BlockInterface
      */
     public function bulletedList($list): self
     {
-        if (is_callable($list)) {
+        if (\is_callable($list)) {
             $list($this->blocks[] = new BulletedListBuilder());
 
             return $this;
@@ -103,7 +99,7 @@ final class Builder implements BlockInterface
      */
     public function numberedList($list): self
     {
-        if (is_callable($list)) {
+        if (\is_callable($list)) {
             $list($this->blocks[] = new NumberedListBuilder());
 
             return $this;
@@ -119,7 +115,7 @@ final class Builder implements BlockInterface
      */
     public function checklist($list): self
     {
-        if (is_callable($list)) {
+        if (\is_callable($list)) {
             $list($this->blocks[] = new ChecklistBuilder());
 
             return $this;
@@ -159,7 +155,7 @@ final class Builder implements BlockInterface
             $glue = PHP_EOL;
         }
 
-        return implode($glue, $this->blocks);
+        return \implode($glue, $this->blocks);
     }
 
     /**
@@ -196,7 +192,7 @@ final class Builder implements BlockInterface
      */
     public function table(array $headers, $values): self
     {
-        if (is_callable($values)) {
+        if (\is_callable($values)) {
             $this->blocks[] = $tableBuilder = new TableBuilder($headers);
 
             $values($tableBuilder);
@@ -211,7 +207,7 @@ final class Builder implements BlockInterface
 
     public function dump(string $file): self
     {
-        file_put_contents($file, $this->getMarkdown());
+        \file_put_contents($file, $this->getMarkdown());
 
         return $this;
     }

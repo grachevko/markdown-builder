@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Premier\MarkdownBuilder\Block;
 
 use Premier\MarkdownBuilder\BlockInterface;
-use function strpos;
 
 final class Code implements BlockInterface
 {
@@ -22,7 +21,8 @@ final class Code implements BlockInterface
     public function __toString(): string
     {
         $backticks = '```';
-        if (false !== strpos($this->code, '```')) {
+
+        if (false !== \strpos($this->code, '```')) {
             $backticks .= '`';
         }
 
