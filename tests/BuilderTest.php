@@ -279,6 +279,31 @@ class BuilderTest extends TestCase
         static::assertSame($markdown, $builder->getMarkdown());
     }
 
+    public function testNumberedNestedList(): void
+    {
+        $markdown = <<<'MARKDOWN'
+            1. One
+            2. Two
+               1. Two.One
+               2. Two.Two
+            3. Three
+            MARKDOWN;
+
+        $builder = new Builder();
+        $builder->numberedList(static function (NumberedListBuilder $builder): void {
+            $builder
+                ->addLine('One')
+                ->addLine(function (Builder $builder): void {
+                    $builder
+                        ->p('Two')
+                        ->numberedList(['Two.One', 'Two.Two']);
+                })
+                ->addLine('Three');
+        });
+
+        static::assertSame($markdown, $builder->getMarkdown());
+    }
+
     public function testMultiLists(): void
     {
         $markdown = <<<'MARKDOWN'

@@ -101,7 +101,7 @@ final class Builder implements BlockInterface
     }
 
     /**
-     * @param array<int, string>|callable $list
+     * @param array<int, string|callable>|callable $list
      */
     public function numberedList($list): self
     {
